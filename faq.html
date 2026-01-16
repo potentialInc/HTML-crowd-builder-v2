@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ - Crowd Builder</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; }
+.glass-nav {
+background: rgba(255, 255, 255, 0.9);
+backdrop-filter: blur(12px);
+border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+/* Custom details marker hiding */
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+</style></head>
+<body class="bg-white text-slate-600 antialiased selection:bg-indigo-100 selection:text-indigo-600">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-2 cursor-pointer">
+                    <div class="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white font-semibold text-sm tracking-tighter shadow-sm">
+                        CB
+                    </div>
+                    <span class="font-semibold text-slate-900 tracking-tight text-sm hidden sm:block">CrowdBuilder</span>
+                </div>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-xs font-medium text-slate-500 hover:text-slate-900 transition-colors">Home</a>
+                    <a href="#" class="text-xs font-medium text-slate-500 hover:text-slate-900 transition-colors">How It Works</a>
+                    <a href="#" class="text-xs font-medium text-slate-900 transition-colors">FAQ</a>
+                </div>
+
+                <!-- Auth Buttons -->
+                <div class="flex items-center gap-3">
+                    <a href="#" class="hidden sm:block text-xs font-medium text-slate-600 hover:text-slate-900 px-3 py-2 transition-colors">Log in</a>
+                    <a href="#" class="inline-flex items-center justify-center px-4 py-2 text-xs font-medium text-white bg-indigo-500 hover:bg-indigo-600 rounded-full transition-all shadow-sm shadow-indigo-200">
+                        Sign up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-16 pb-12 sm:pt-24 sm:pb-20 bg-slate-50 border-b border-slate-200/60 overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(#6366f1 1px, transparent 1px); background-size: 32px 32px;"></div>
+        
+        <div class="relative max-w-3xl mx-auto px-4 text-center z-10">
+            <h1 class="text-3xl sm:text-4xl font-semibold text-slate-900 tracking-tight mb-4">Frequently Asked Questions</h1>
+            <p class="text-base text-slate-500 mb-8 max-w-xl mx-auto leading-relaxed">
+                Find answers to common questions about Crowd Builder, investing, and managing your account.
+            </p>
+
+            <!-- Search Bar -->
+            <div class="relative max-w-lg mx-auto group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <iconify-icon icon="lucide:search" class="text-slate-400 group-focus-within:text-indigo-500 transition-colors" width="18" stroke-width="1.5"></iconify-icon>
+                </div>
+                <input type="text" class="block w-full pl-11 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all shadow-sm text-slate-900" placeholder="Search for answers...">
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+        
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-12">
+            <button class="px-4 py-2 rounded-full text-xs font-medium bg-slate-900 text-white shadow-sm ring-1 ring-slate-900 transition-all">
+                General
+            </button>
+            <button class="px-4 py-2 rounded-full text-xs font-medium bg-white text-slate-600 ring-1 ring-slate-200 hover:ring-slate-300 hover:bg-slate-50 transition-all">
+                Investment
+            </button>
+            <button class="px-4 py-2 rounded-full text-xs font-medium bg-white text-slate-600 ring-1 ring-slate-200 hover:ring-slate-300 hover:bg-slate-50 transition-all">
+                Account
+            </button>
+            <button class="px-4 py-2 rounded-full text-xs font-medium bg-white text-slate-600 ring-1 ring-slate-200 hover:ring-slate-300 hover:bg-slate-50 transition-all">
+                Security
+            </button>
+        </div>
+
+        <!-- FAQ Categories -->
+        <div class="space-y-16">
+            
+            <!-- Category: General -->
+            <div class="scroll-mt-24">
+                <div class="flex items-center mb-6">
+                    <div class="p-2 bg-indigo-50 text-indigo-600 rounded-lg mr-3">
+                        <iconify-icon icon="lucide:sparkles" width="20"></iconify-icon>
+                    </div>
+                    <h2 class="text-lg font-semibold text-slate-900 tracking-tight">General Questions</h2>
+                </div>
+                
+                <div class="space-y-4">
+                    <!-- Item 1 -->
+                    <details class="group border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-slate-300 transition-colors duration-200 open:ring-2 open:ring-indigo-500/5 open:border-indigo-500/50">
+                        <summary class="flex justify-between items-center p-5 cursor-pointer select-none">
+                            <span class="text-sm font-medium text-slate-900">What is Crowd Builder?</span>
+                            <span class="text-slate-400 group-hover:text-slate-600 transition-colors flex items-center">
+                                <iconify-icon icon="lucide:plus" class="block group-open:hidden" width="18"></iconify-icon>
+                                <iconify-icon icon="lucide:minus" class="hidden group-open:block" width="18"></iconify-icon>
+                            </span>
+                        </summary>
+                        <div class="px-5 pb-5 pt-0 text-sm text-slate-600 leading-relaxed animate-in fade-in slide-in-from-top-1 duration-200">
+                            Crowd Builder is a decentralized, crowd-owned investment platform. We allow our community to propose, vet, and fund startup ideas collectively. By pooling resources, we democratize access to early-stage venture capital opportunities.
+                        </div>
+                    </details>
+
+                    <!-- Item 2 -->
+                    <details class="group border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-slate-300 transition-colors duration-200 open:ring-2 open:ring-indigo-500/5 open:border-indigo-500/50">
+                        <summary class="flex justify-between items-center p-5 cursor-pointer select-none">
+                            <span class="text-sm font-medium text-slate-900">How does the voting system work?</span>
+                            <span class="text-slate-400 group-hover:text-slate-600 transition-colors flex items-center">
+                                <iconify-icon icon="lucide:plus" class="block group-open:hidden" width="18"></iconify-icon>
+                                <iconify-icon icon="lucide:minus" class="hidden group-open:block" width="18"></iconify-icon>
+                            </span>
+                        </summary>
+                        <div class="px-5 pb-5 pt-0 text-sm text-slate-600 leading-relaxed">
+                            Every registered member receives voting power proportional to their contribution history. Ideas are submitted to the "Queue," and projects that receive enough positive votes move to the funding stage. This ensures only high-quality projects vetted by the crowd are funded.
+                        </div>
+                    </details>
+
+                    <!-- Item 3 -->
+                    <details class="group border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-slate-300 transition-colors duration-200 open:ring-2 open:ring-indigo-500/5 open:border-indigo-500/50">
+                        <summary class="flex justify-between items-center p-5 cursor-pointer select-none">
+                            <span class="text-sm font-medium text-slate-900">Who can submit ideas?</span>
+                            <span class="text-slate-400 group-hover:text-slate-600 transition-colors flex items-center">
+                                <iconify-icon icon="lucide:plus" class="block group-open:hidden" width="18"></iconify-icon>
+                                <iconify-icon icon="lucide:minus" class="hidden group-open:block" width="18"></iconify-icon>
+                            </span>
+                        </summary>
+                        <div class="px-5 pb-5 pt-0 text-sm text-slate-600 leading-relaxed">
+                            Any verified user can submit a project proposal. Submissions require a detailed business plan, budget breakdown, and a small submission fee (to prevent spam) which is refunded if the project reaches the voting threshold.
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Category: Investment -->
+            <div class="scroll-mt-24">
+                <div class="flex items-center mb-6">
+                    <div class="p-2 bg-indigo-50 text-indigo-600 rounded-lg mr-3">
+                        <iconify-icon icon="lucide:trending-up" width="20"></iconify-icon>
+                    </div>
+                    <h2 class="text-lg font-semibold text-slate-900 tracking-tight">Investment &amp; Funding</h2>
+                </div>
+                
+                <div class="space-y-4">
+                    <details class="group border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-slate-300 transition-colors duration-200 open:ring-2 open:ring-indigo-500/5 open:border-indigo-500/50">
+                        <summary class="flex justify-between items-center p-5 cursor-pointer select-none">
+                            <span class="text-sm font-medium text-slate-900">How do I vote for an idea?</span>
+                            <span class="text-slate-400 group-hover:text-slate-600 transition-colors flex items-center">
+                                <iconify-icon icon="lucide:plus" class="block group-open:hidden" width="18"></iconify-icon>
+                                <iconify-icon icon="lucide:minus" class="hidden group-open:block" width="18"></iconify-icon>
+                            </span>
+                        </summary>
+                        <div class="px-5 pb-5 pt-0 text-sm text-slate-600 leading-relaxed">
+                            Navigate to the "Proposals" dashboard. You can review pitch decks and financial models there. Click "Upvote" to pledge your support. You have a limited number of votes per cycle, so choose wisely.
+                        </div>
+                    </details>
+
+                    <details class="group border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-slate-300 transition-colors duration-200 open:ring-2 open:ring-indigo-500/5 open:border-indigo-500/50">
+                        <summary class="flex justify-between items-center p-5 cursor-pointer select-none">
+                            <span class="text-sm font-medium text-slate-900">What happens when an idea gets funded?</span>
+                            <span class="text-slate-400 group-hover:text-slate-600 transition-colors flex items-center">
+                                <iconify-icon icon="lucide:plus" class="block group-open:hidden" width="18"></iconify-icon>
+                                <iconify-icon icon="lucide:minus" class="hidden group-open:block" width="18"></iconify-icon>
+                            </span>
+                        </summary>
+                        <div class="px-5 pb-5 pt-0 text-sm text-slate-600 leading-relaxed">
+                            Once a project meets its funding goal, the capital is held in escrow. Funds are released in tranches based on milestone completion. As an investor, you receive equity tokens representing your stake in the project.
+                        </div>
+                    </details>
+
+                    <details class="group border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-slate-300 transition-colors duration-200 open:ring-2 open:ring-indigo-500/5 open:border-indigo-500/50">
+                        <summary class="flex justify-between items-center p-5 cursor-pointer select-none">
+                            <span class="text-sm font-medium text-slate-900">Are there any fees?</span>
+                            <span class="text-slate-400 group-hover:text-slate-600 transition-colors flex items-center">
+                                <iconify-icon icon="lucide:plus" class="block group-open:hidden" width="18"></iconify-icon>
+                                <iconify-icon icon="lucide:minus" class="hidden group-open:block" width="18"></iconify-icon>
+                            </span>
+                        </summary>
+                        <div class="px-5 pb-5 pt-0 text-sm text-slate-600 leading-relaxed">
+                            Crowd Builder charges a 2% platform fee on successfully funded projects to cover operational costs. There are no fees to create an account or browse proposals.
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Category: Account -->
+            <div class="scroll-mt-24">
+                <div class="flex items-center mb-6">
+                    <div class="p-2 bg-indigo-50 text-indigo-600 rounded-lg mr-3">
+                        <iconify-icon icon="lucide:user" width="20"></iconify-icon>
+                    </div>
+                    <h2 class="text-lg font-semibold text-slate-900 tracking-tight">Account Management</h2>
+                </div>
+                
+                <div class="space-y-4">
+                    <details class="group border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-slate-300 transition-colors duration-200 open:ring-2 open:ring-indigo-500/5 open:border-indigo-500/50">
+                        <summary class="flex justify-between items-center p-5 cursor-pointer select-none">
+                            <span class="text-sm font-medium text-slate-900">How do I create an account?</span>
+                            <span class="text-slate-400 group-hover:text-slate-600 transition-colors flex items-center">
+                                <iconify-icon icon="lucide:plus" class="block group-open:hidden" width="18"></iconify-icon>
+                                <iconify-icon icon="lucide:minus" class="hidden group-open:block" width="18"></iconify-icon>
+                            </span>
+                        </summary>
+                        <div class="px-5 pb-5 pt-0 text-sm text-slate-600 leading-relaxed">
+                            Click the "Sign Up" button in the top right corner. You'll need to provide a valid email address and create a password. You can also sign up using your Google or GitHub account.
+                        </div>
+                    </details>
+
+                    <details class="group border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-slate-300 transition-colors duration-200 open:ring-2 open:ring-indigo-500/5 open:border-indigo-500/50">
+                        <summary class="flex justify-between items-center p-5 cursor-pointer select-none">
+                            <span class="text-sm font-medium text-slate-900">Can I delete my account?</span>
+                            <span class="text-slate-400 group-hover:text-slate-600 transition-colors flex items-center">
+                                <iconify-icon icon="lucide:plus" class="block group-open:hidden" width="18"></iconify-icon>
+                                <iconify-icon icon="lucide:minus" class="hidden group-open:block" width="18"></iconify-icon>
+                            </span>
+                        </summary>
+                        <div class="px-5 pb-5 pt-0 text-sm text-slate-600 leading-relaxed">
+                            Yes, you can request account deletion from your Settings page. Please note that if you have active investments, you may need to liquidate or transfer them before the account can be fully closed.
+                        </div>
+                    </details>
+
+                    <details class="group border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-slate-300 transition-colors duration-200 open:ring-2 open:ring-indigo-500/5 open:border-indigo-500/50">
+                        <summary class="flex justify-between items-center p-5 cursor-pointer select-none">
+                            <span class="text-sm font-medium text-slate-900">How do I update my profile?</span>
+                            <span class="text-slate-400 group-hover:text-slate-600 transition-colors flex items-center">
+                                <iconify-icon icon="lucide:plus" class="block group-open:hidden" width="18"></iconify-icon>
+                                <iconify-icon icon="lucide:minus" class="hidden group-open:block" width="18"></iconify-icon>
+                            </span>
+                        </summary>
+                        <div class="px-5 pb-5 pt-0 text-sm text-slate-600 leading-relaxed">
+                            Navigate to Settings &gt; Profile. There you can update your display name, bio, notification preferences, and linked financial accounts.
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Category: Security -->
+            <div class="scroll-mt-24">
+                <div class="flex items-center mb-6">
+                    <div class="p-2 bg-indigo-50 text-indigo-600 rounded-lg mr-3">
+                        <iconify-icon icon="lucide:shield-check" width="20"></iconify-icon>
+                    </div>
+                    <h2 class="text-lg font-semibold text-slate-900 tracking-tight">Security &amp; Privacy</h2>
+                </div>
+                
+                <div class="space-y-4">
+                    <details class="group border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-slate-300 transition-colors duration-200 open:ring-2 open:ring-indigo-500/5 open:border-indigo-500/50">
+                        <summary class="flex justify-between items-center p-5 cursor-pointer select-none">
+                            <span class="text-sm font-medium text-slate-900">Is my data secure?</span>
+                            <span class="text-slate-400 group-hover:text-slate-600 transition-colors flex items-center">
+                                <iconify-icon icon="lucide:plus" class="block group-open:hidden" width="18"></iconify-icon>
+                                <iconify-icon icon="lucide:minus" class="hidden group-open:block" width="18"></iconify-icon>
+                            </span>
+                        </summary>
+                        <div class="px-5 pb-5 pt-0 text-sm text-slate-600 leading-relaxed">
+                            We use bank-grade 256-bit encryption for all data in transit and at rest. We do not sell your personal data to third parties.
+                        </div>
+                    </details>
+
+                    <details class="group border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-slate-300 transition-colors duration-200 open:ring-2 open:ring-indigo-500/5 open:border-indigo-500/50">
+                        <summary class="flex justify-between items-center p-5 cursor-pointer select-none">
+                            <span class="text-sm font-medium text-slate-900">How is my identity verified?</span>
+                            <span class="text-slate-400 group-hover:text-slate-600 transition-colors flex items-center">
+                                <iconify-icon icon="lucide:plus" class="block group-open:hidden" width="18"></iconify-icon>
+                                <iconify-icon icon="lucide:minus" class="hidden group-open:block" width="18"></iconify-icon>
+                            </span>
+                        </summary>
+                        <div class="px-5 pb-5 pt-0 text-sm text-slate-600 leading-relaxed">
+                            We partner with a third-party identity provider to perform KYC (Know Your Customer) checks. This usually involves uploading a photo of your government ID and a selfie. This process is required by law for all investment platforms.
+                        </div>
+                    </details>
+
+                    <details class="group border border-slate-200 bg-white rounded-xl overflow-hidden hover:border-slate-300 transition-colors duration-200 open:ring-2 open:ring-indigo-500/5 open:border-indigo-500/50">
+                        <summary class="flex justify-between items-center p-5 cursor-pointer select-none">
+                            <span class="text-sm font-medium text-slate-900">What payment methods are accepted?</span>
+                            <span class="text-slate-400 group-hover:text-slate-600 transition-colors flex items-center">
+                                <iconify-icon icon="lucide:plus" class="block group-open:hidden" width="18"></iconify-icon>
+                                <iconify-icon icon="lucide:minus" class="hidden group-open:block" width="18"></iconify-icon>
+                            </span>
+                        </summary>
+                        <div class="px-5 pb-5 pt-0 text-sm text-slate-600 leading-relaxed">
+                            We currently accept ACH bank transfers, wire transfers for large amounts, and major credit cards (Visa, Mastercard, Amex).
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Contact CTA -->
+    <div class="bg-slate-50 border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 py-16 sm:px-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-8">
+                <div class="text-center sm:text-left">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 mb-4">
+                        <iconify-icon icon="lucide:message-circle" width="24"></iconify-icon>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-900 tracking-tight mb-2">Still have questions?</h3>
+                    <p class="text-sm text-slate-500 max-w-sm">Can't find the answer you're looking for? Please chat to our friendly team.</p>
+                </div>
+                <div class="flex flex-col gap-3 w-full sm:w-auto">
+                    <a href="mailto:support@crowdbuilder.com" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-all shadow-sm shadow-indigo-200">
+                        Contact Support
+                    </a>
+                    <a href="#" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-slate-600 bg-white border border-slate-200 hover:bg-slate-50 rounded-lg transition-colors">
+                        Visit Help Center
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simple Footer -->
+    <footer class="border-t border-slate-200 bg-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-xs text-slate-400">© 2025 CrowdBuilder Inc. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="#" class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Terms</a>
+                <a href="#" class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Privacy</a>
+                <a href="#" class="text-xs text-slate-500 hover:text-slate-900 transition-colors">Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+
+</body></html>

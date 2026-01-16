@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crowd Builder - Reports Center</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#6366F1',
+'primary-hover': '#4F46E5',
+secondary: '#64748B',
+surface: '#FFFFFF',
+background: '#F9FAFB',
+error: '#EF4444',
+warning: '#F59E0B',
+success: '#10B981',
+},
+boxShadow: {
+'xs': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+'modal': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+}
+}
+}
+}
+</script></head>
+<body class="bg-background text-slate-600 antialiased min-h-screen pt-16">
+
+    <!-- Top Navbar (Fixed) -->
+    <nav class="fixed top-0 left-0 right-0 h-16 bg-surface border-b border-slate-200 z-40 px-4 sm:px-6 lg:px-8">
+        <div class="h-full max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Left: Logo -->
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold tracking-tighter text-sm shadow-sm">
+                    CB
+                </div>
+                <span class="font-semibold text-slate-900 tracking-tight hidden sm:block">CrowdBuilder</span>
+            </div>
+
+            <!-- Center: Search -->
+            <div class="flex-1 max-w-md mx-4 hidden md:block">
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <iconify-icon icon="lucide:search" class="text-slate-400 group-focus-within:text-primary transition-colors" width="18"></iconify-icon>
+                    </div>
+                    <input type="text" class="block w-full h-10 pl-10 pr-3 rounded-lg bg-slate-50 border-none text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 sm:text-sm transition-all" placeholder="Search reports...">
+                </div>
+            </div>
+
+            <!-- Right: Actions -->
+            <div class="flex items-center gap-3 sm:gap-4">
+                <button class="hidden sm:flex items-center justify-center h-9 px-4 rounded-lg bg-primary hover:bg-primary-hover text-white text-xs font-medium transition-colors shadow-xs">
+                    <iconify-icon icon="lucide:plus" width="14" class="mr-1.5"></iconify-icon>
+                    Submit Idea
+                </button>
+                
+                <button class="relative p-2 text-slate-400 hover:text-slate-600 transition-colors rounded-full hover:bg-slate-100">
+                    <iconify-icon icon="lucide:bell" width="20"></iconify-icon>
+                    <span class="absolute top-2 right-2.5 block h-2 w-2 rounded-full bg-error ring-2 ring-white"></span>
+                </button>
+
+                <div class="h-8 w-1px bg-slate-200 mx-1 hidden sm:block"></div>
+
+                <button class="flex items-center gap-2 focus:outline-none">
+                    <img class="h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://i.pravatar.cc/150?u=admin_user" alt="Profile">
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-[1200px] mx-auto px-4 sm:px-6 py-8">
+        
+        <!-- Page Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
+            <div>
+                <div class="flex items-center gap-3">
+                    <h1 class="text-3xl font-bold tracking-tight text-slate-900">Reports Center</h1>
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-error text-white shadow-sm">
+                        12 pending
+                    </span>
+                </div>
+                <p class="mt-2 text-sm text-slate-500">Review and resolve user reports to maintain community standards.</p>
+            </div>
+            
+            <!-- Quick Actions (Optional) -->
+            <div class="flex gap-2">
+                <button class="inline-flex items-center px-3 py-2 border border-slate-300 shadow-sm text-sm font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50">
+                    <iconify-icon icon="lucide:download" width="16" class="mr-2"></iconify-icon>
+                    Export CSV
+                </button>
+            </div>
+        </div>
+
+        <!-- Filters & Tabs -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-slate-200 pb-1">
+            <!-- Tabs -->
+            <nav class="-mb-px flex space-x-6 overflow-x-auto scrollbar-hide" aria-label="Tabs">
+                <button class="group inline-flex items-center py-4 px-1 border-b-2 border-primary text-primary font-medium text-sm whitespace-nowrap">
+                    All Reports
+                    <span class="ml-2 bg-primary/10 text-primary py-0.5 px-2 rounded-full text-xs hidden sm:inline-block">24</span>
+                </button>
+                <button class="group inline-flex items-center py-4 px-1 border-b-2 border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 font-medium text-sm transition-colors whitespace-nowrap">
+                    <iconify-icon icon="lucide:lightbulb" width="16" class="mr-2"></iconify-icon>
+                    Ideas
+                </button>
+                <button class="group inline-flex items-center py-4 px-1 border-b-2 border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 font-medium text-sm transition-colors whitespace-nowrap">
+                    <iconify-icon icon="lucide:message-square" width="16" class="mr-2"></iconify-icon>
+                    Comments
+                </button>
+                <button class="group inline-flex items-center py-4 px-1 border-b-2 border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 font-medium text-sm transition-colors whitespace-nowrap">
+                    <iconify-icon icon="lucide:users" width="16" class="mr-2"></iconify-icon>
+                    Users
+                </button>
+            </nav>
+
+            <!-- Status Filter -->
+            <div class="relative pb-3 sm:pb-0">
+                <button onclick="document.getElementById('status-dropdown').classList.toggle('hidden')" class="w-full sm:w-auto inline-flex items-center justify-between sm:justify-center px-3 py-2 border border-slate-300 shadow-sm text-sm font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                    <div class="flex items-center">
+                        <iconify-icon icon="lucide:filter" width="16" class="mr-2 text-slate-400"></iconify-icon>
+                        Status: <span class="text-slate-900 ml-1">Pending</span>
+                    </div>
+                    <iconify-icon icon="lucide:chevron-down" width="16" class="ml-2 text-slate-400"></iconify-icon>
+                </button>
+                <!-- Dropdown Menu -->
+                <div id="status-dropdown" class="hidden absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-20 focus:outline-none animate-fade-in origin-top-right">
+                    <div class="py-1">
+                        <a href="#" class="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">
+                            <span class="w-2 h-2 rounded-full bg-warning mr-2"></span> Pending
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">
+                            <span class="w-2 h-2 rounded-full bg-success mr-2"></span> Reviewed
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">
+                            <span class="w-2 h-2 rounded-full bg-slate-400 mr-2"></span> Dismissed
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports Table -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-slate-200">
+                    <thead class="bg-slate-50/80">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider w-12">Type</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Reported Item</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Reported By</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Reason</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Date</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</th>
+                            <th scope="col" class="relative px-6 py-3"><span class="sr-only">Actions</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-slate-200">
+                        <!-- Row 1: Idea Report -->
+                        <tr class="hover:bg-slate-50 transition-colors group">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-50 text-indigo-600">
+                                    <iconify-icon icon="lucide:lightbulb" width="16"></iconify-icon>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="max-w-xs">
+                                    <div class="text-sm font-medium text-slate-900 truncate">SaaS Boilerplate Generator</div>
+                                    <div class="text-xs text-slate-500 truncate">Generate production ready code in...</div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <img class="h-6 w-6 rounded-full object-cover mr-2" src="https://i.pravatar.cc/150?u=a" alt="">
+                                    <div class="text-sm font-medium text-slate-900">alex_dev</div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                    Spam
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+                                2 hours ago
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                    Pending
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button onclick="openModal()" class="text-primary hover:text-primary-hover font-semibold bg-primary/5 hover:bg-primary/10 px-3 py-1.5 rounded-md transition-colors">Review</button>
+                            </td>
+                        </tr>
+
+                        <!-- Row 2: Comment Report -->
+                        <tr class="hover:bg-slate-50 transition-colors group">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-sky-50 text-sky-600">
+                                    <iconify-icon icon="lucide:message-square" width="16"></iconify-icon>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="max-w-xs">
+                                    <div class="text-sm font-medium text-slate-900 truncate">"This idea is absolutely terrible..."</div>
+                                    <div class="text-xs text-slate-500 truncate">On: Marketing Automation Tool</div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <img class="h-6 w-6 rounded-full object-cover mr-2" src="https://i.pravatar.cc/150?u=b" alt="">
+                                    <div class="text-sm font-medium text-slate-900">sarah_j</div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">
+                                    Harassment
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+                                5 hours ago
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                    Pending
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button onclick="openModal()" class="text-primary hover:text-primary-hover font-semibold bg-primary/5 hover:bg-primary/10 px-3 py-1.5 rounded-md transition-colors">Review</button>
+                            </td>
+                        </tr>
+
+                        <!-- Row 3: User Report -->
+                        <tr class="hover:bg-slate-50 transition-colors group">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-purple-50 text-purple-600">
+                                    <iconify-icon icon="lucide:user" width="16"></iconify-icon>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="max-w-xs">
+                                    <div class="text-sm font-medium text-slate-900 truncate">CryptoBot_99</div>
+                                    <div class="text-xs text-slate-500 truncate">User Profile</div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <img class="h-6 w-6 rounded-full object-cover mr-2" src="https://i.pravatar.cc/150?u=c" alt="">
+                                    <div class="text-sm font-medium text-slate-900">mike_t</div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                                    Inappropriate
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+                                1 day ago
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    Reviewed
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button class="text-slate-400 hover:text-slate-600 font-medium px-3 py-1.5 transition-colors">Details</button>
+                            </td>
+                        </tr>
+                        
+                        <!-- Row 4: Comment Report -->
+                        <tr class="hover:bg-slate-50 transition-colors group">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full bg-sky-50 text-sky-600">
+                                    <iconify-icon icon="lucide:message-square" width="16"></iconify-icon>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="max-w-xs">
+                                    <div class="text-sm font-medium text-slate-900 truncate">"Join my telegram channel for..."</div>
+                                    <div class="text-xs text-slate-500 truncate">On: Mobile App Concept</div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <img class="h-6 w-6 rounded-full object-cover mr-2" src="https://i.pravatar.cc/150?u=d" alt="">
+                                    <div class="text-sm font-medium text-slate-900">lisa_w</div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                    Spam
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+                                2 days ago
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">
+                                    Dismissed
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button class="text-slate-400 hover:text-slate-600 font-medium px-3 py-1.5 transition-colors">Details</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty State (Hidden for demo) -->
+            <div class="hidden flex flex-col items-center justify-center py-16 px-4 text-center">
+                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
+                    <iconify-icon icon="lucide:check-circle" class="text-slate-400" width="32"></iconify-icon>
+                </div>
+                <h3 class="text-lg font-medium text-slate-900">No pending reports</h3>
+                <p class="mt-1 text-sm text-slate-500">Great job! All reports have been reviewed.</p>
+            </div>
+
+            <!-- Pagination -->
+            <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-slate-200 sm:px-6">
+                <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                    <div>
+                        <p class="text-sm text-slate-700">
+                            Showing <span class="font-medium">1</span> to <span class="font-medium">10</span> of <span class="font-medium">24</span> results
+                        </p>
+                    </div>
+                    <div>
+                        <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                            <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-slate-300 bg-white text-sm font-medium text-slate-500 hover:bg-slate-50">
+                                <span class="sr-only">Previous</span>
+                                <iconify-icon icon="lucide:chevron-left" width="16"></iconify-icon>
+                            </a>
+                            <a href="#" aria-current="page" class="z-10 bg-primary/5 border-primary text-primary relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                1
+                            </a>
+                            <a href="#" class="bg-white border-slate-300 text-slate-500 hover:bg-slate-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                2
+                            </a>
+                            <a href="#" class="bg-white border-slate-300 text-slate-500 hover:bg-slate-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                3
+                            </a>
+                            <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-slate-300 bg-white text-sm font-medium text-slate-500 hover:bg-slate-50">
+                                <span class="sr-only">Next</span>
+                                <iconify-icon icon="lucide:chevron-right" width="16"></iconify-icon>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+                <!-- Mobile Pagination -->
+                <div class="flex items-center justify-between w-full sm:hidden">
+                    <button class="relative inline-flex items-center px-4 py-2 border border-slate-300 text-sm font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50">
+                        Previous
+                    </button>
+                    <button class="ml-3 relative inline-flex items-center px-4 py-2 border border-slate-300 text-sm font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Review Modal Overlay -->
+    <div id="review-modal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <!-- Modal Panel -->
+                <div class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-modal transition-all sm:my-8 sm:w-full sm:max-w-[600px]">
+                    
+                    <!-- Header -->
+                    <div class="bg-white px-6 py-5 border-b border-slate-100 flex items-center justify-between">
+                        <h3 class="text-lg font-semibold leading-6 text-slate-900" id="modal-title">Review Report</h3>
+                        <button onclick="closeModal()" class="text-slate-400 hover:text-slate-500 focus:outline-none rounded-full p-1 hover:bg-slate-100 transition-colors">
+                            <iconify-icon icon="lucide:x" width="20"></iconify-icon>
+                        </button>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="px-6 py-6">
+                        
+                        <!-- Reported Content Preview -->
+                        <div class="mb-6">
+                            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Reported Comment</label>
+                            <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <iconify-icon icon="lucide:quote" class="text-slate-300" width="20"></iconify-icon>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="text-sm text-slate-800 leading-relaxed font-medium">"This idea is absolutely terrible and you should never post again. Go away."</p>
+                                        <div class="mt-3 flex items-center gap-2 text-xs text-slate-500">
+                                            <span>Posted by <strong>bad_actor_23</strong></span>
+                                            <span>•</span>
+                                            <span>On idea: <a href="#" class="text-primary hover:underline">Marketing Automation Tool</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reporter Info -->
+                        <div class="bg-white">
+                            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Report Details</label>
+                            
+                            <div class="flex items-start gap-4">
+                                <img src="https://i.pravatar.cc/150?u=b" alt="" class="h-10 w-10 rounded-full border border-slate-200">
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div class="text-sm font-medium text-slate-900">sarah_j</div>
+                                        <span class="text-xs text-slate-500">5 hours ago</span>
+                                    </div>
+                                    <div class="mt-1 flex items-center gap-2">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200">
+                                            Reason: Harassment
+                                        </span>
+                                        <span class="text-xs text-slate-500">1 previous report from this user</span>
+                                    </div>
+                                    <div class="mt-2 text-sm text-slate-600 bg-yellow-50/50 p-2 rounded border border-yellow-100/50 italic">
+                                        "This user keeps posting hateful comments on every idea I submit."
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Related Info Alert -->
+                        <div class="mt-6 flex items-center gap-3 p-3 rounded-lg bg-orange-50 border border-orange-100 text-orange-800 text-xs font-medium">
+                            <iconify-icon icon="lucide:alert-circle" width="16"></iconify-icon>
+                            <span>This content has been reported 2 other times.</span>
+                        </div>
+
+                    </div>
+
+                    <!-- Footer / Actions -->
+                    <div class="bg-slate-50 px-6 py-4 flex flex-col sm:flex-row sm:justify-between items-center gap-3 border-t border-slate-200">
+                        <button onclick="closeModal()" class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-slate-300 shadow-sm text-sm font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all">
+                            Dismiss Report
+                        </button>
+                        
+                        <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                            <button class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-warning hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-warning transition-all">
+                                Warn User
+                            </button>
+                            <button class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-red-200 shadow-sm text-sm font-medium rounded-lg text-error bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-error transition-all">
+                                <iconify-icon icon="lucide:ban" width="16" class="mr-2"></iconify-icon>
+                                Ban User
+                            </button>
+                            <button class="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-error hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-error transition-all">
+                                <iconify-icon icon="lucide:trash-2" width="16" class="mr-2"></iconify-icon>
+                                Delete Content
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal Logic
+        const modal = document.getElementById('review-modal');
+        
+        function openModal() {
+            modal.classList.remove('hidden');
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            // Restore body scroll
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        });
+    </script>
+
+</body></html>

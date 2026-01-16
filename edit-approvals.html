@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Approvals - Crowd Builder Admin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; }
+/* Custom scrollbar for table */
+.custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+.glass-header {
+background: rgba(255, 255, 255, 0.9);
+backdrop-filter: blur(8px);
+}
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#6366F1',
+'primary-dark': '#4F46E5',
+secondary: '#64748B',
+background: '#F9FAFB',
+surface: '#FFFFFF',
+},
+fontFamily: {
+sans: ['Inter', 'sans-serif'],
+}
+}
+}
+}
+</script></head>
+<body class="bg-background text-slate-600 antialiased min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-40 border-b border-slate-200 glass-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Left -->
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white font-bold text-sm tracking-tighter shadow-sm">
+                            CB
+                        </div>
+                        <span class="font-semibold text-slate-900 tracking-tight text-sm hidden sm:block">CrowdBuilder <span class="text-slate-400 font-normal">Admin</span></span>
+                    </div>
+                    
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a href="#" class="px-3 py-2 rounded-md text-xs font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors">Dashboard</a>
+                        <a href="#" class="px-3 py-2 rounded-md text-xs font-medium text-slate-900 bg-slate-100">Approvals</a>
+                        <a href="#" class="px-3 py-2 rounded-md text-xs font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors">Users</a>
+                        <a href="#" class="px-3 py-2 rounded-md text-xs font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors">Settings</a>
+                    </div>
+                </div>
+
+                <!-- Right -->
+                <div class="flex items-center gap-4">
+                    <div class="hidden sm:block relative">
+                        <iconify-icon icon="lucide:search" class="absolute left-2.5 top-2 text-slate-400" width="16"></iconify-icon>
+                        <input type="text" placeholder="Search admin..." class="h-8 w-48 pl-8 pr-3 text-xs bg-white border border-slate-200 rounded-md focus:outline-none focus:ring-1 focus:ring-slate-300 placeholder-slate-400 transition-all">
+                    </div>
+                    
+                    <div class="h-4 w-px bg-slate-200 mx-1"></div>
+
+                    <button class="text-slate-500 hover:text-slate-700 relative">
+                        <iconify-icon icon="lucide:bell" width="18"></iconify-icon>
+                        <span class="absolute -top-1 -right-1 h-2 w-2 bg-red-500 rounded-full border border-white"></span>
+                    </button>
+                    
+                    <button class="flex items-center gap-2 ml-1">
+                        <img class="h-7 w-7 rounded-full bg-slate-100 ring-1 ring-slate-200 object-cover" src="https://i.pravatar.cc/150?u=admin" alt="Admin">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Header -->
+        <div class="sm:flex sm:items-center sm:justify-between mb-8">
+            <div>
+                <div class="flex items-center gap-3">
+                    <h1 class="text-xl font-semibold text-slate-900 tracking-tight">Edit Approvals</h1>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700 ring-1 ring-inset ring-yellow-600/20">
+                        5 Pending
+                    </span>
+                </div>
+                <p class="mt-1 text-sm text-slate-500">Review and approve user-submitted changes to investment ideas.</p>
+            </div>
+            <div class="mt-4 sm:mt-0 flex gap-3">
+                <button class="inline-flex items-center justify-center px-4 py-2 text-xs font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-200">
+                    <iconify-icon icon="lucide:history" class="mr-2" width="14"></iconify-icon>
+                    History
+                </button>
+                <button class="inline-flex items-center justify-center px-4 py-2 text-xs font-medium text-white bg-slate-900 border border-transparent rounded-lg hover:bg-slate-800 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900">
+                    <iconify-icon icon="lucide:check-circle" class="mr-2" width="14"></iconify-icon>
+                    Approve All
+                </button>
+            </div>
+        </div>
+
+        <!-- Filters & Sort -->
+        <div class="bg-white rounded-t-xl border border-slate-200 border-b-0 p-4 flex flex-col sm:flex-row gap-4 justify-between items-center shadow-sm relative z-10">
+            <div class="w-full sm:w-auto flex gap-3 flex-1">
+                <div class="relative w-full sm:w-64">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <iconify-icon icon="lucide:search" class="text-slate-400" width="16"></iconify-icon>
+                    </div>
+                    <input type="text" class="block w-full h-9 pl-9 pr-3 rounded-lg border-slate-200 text-slate-900 text-xs placeholder-slate-400 focus:ring-primary focus:border-primary shadow-sm" placeholder="Search by title or user...">
+                </div>
+                
+                <div class="relative hidden sm:block">
+                    <select class="h-9 pl-3 pr-8 rounded-lg border-slate-200 text-slate-600 text-xs font-medium focus:ring-primary focus:border-primary shadow-sm appearance-none bg-white cursor-pointer hover:border-slate-300">
+                        <option>All Changes</option>
+                        <option>Title Changes</option>
+                        <option>Description Changes</option>
+                        <option>Category Changes</option>
+                    </select>
+                    <iconify-icon icon="lucide:chevron-down" class="absolute right-2.5 top-3 text-slate-400 pointer-events-none" width="14"></iconify-icon>
+                </div>
+            </div>
+
+            <div class="w-full sm:w-auto flex items-center justify-end gap-2">
+                <span class="text-xs text-slate-400 hidden sm:block mr-1">Sort by:</span>
+                <div class="relative w-full sm:w-auto">
+                    <select class="w-full sm:w-auto h-9 pl-3 pr-8 rounded-lg border-slate-200 text-slate-600 text-xs font-medium focus:ring-primary focus:border-primary shadow-sm appearance-none bg-white cursor-pointer hover:border-slate-300">
+                        <option>Newest First</option>
+                        <option>Oldest First</option>
+                        <option>Most Changes</option>
+                    </select>
+                    <iconify-icon icon="lucide:chevron-down" class="absolute right-2.5 top-3 text-slate-400 pointer-events-none" width="14"></iconify-icon>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="bg-white border border-slate-200 rounded-b-xl shadow-sm overflow-hidden mb-8">
+            <div class="overflow-x-auto custom-scrollbar">
+                <table class="min-w-full divide-y divide-slate-100">
+                    <thead class="bg-slate-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Idea Title</th>
+                            <th scope="col" class="px-6 py-3 text-left text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Submitted By</th>
+                            <th scope="col" class="px-6 py-3 text-left text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Change Type</th>
+                            <th scope="col" class="px-6 py-3 text-left text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Original <span class="text-slate-400 mx-1">→</span> New</th>
+                            <th scope="col" class="px-6 py-3 text-left text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Submitted</th>
+                            <th scope="col" class="relative px-6 py-3">
+                                <span class="sr-only">Actions</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-slate-100">
+                        
+                        <!-- Row 1: Title Change -->
+                        <tr class="hover:bg-slate-50/50 transition-colors group">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="h-8 w-8 rounded bg-indigo-50 flex items-center justify-center text-primary flex-shrink-0">
+                                        <iconify-icon icon="lucide:bot" width="16"></iconify-icon>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="text-sm font-medium text-slate-900">AI Investment Advisor</div>
+                                        <div class="text-[11px] text-slate-500">ID: #8824</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <img class="h-6 w-6 rounded-full object-cover" src="https://i.pravatar.cc/150?u=john" alt="">
+                                    <div class="ml-2 text-xs font-medium text-slate-700">John Smith</div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-medium bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-600/10">
+                                    Title Change
+                                </span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center text-xs gap-2">
+                                    <span class="text-slate-400 line-through decoration-slate-300">AI Advisor</span>
+                                    <iconify-icon icon="lucide:arrow-right" class="text-slate-300 flex-shrink-0" width="12"></iconify-icon>
+                                    <span class="font-medium text-slate-900 bg-green-50 px-1 py-0.5 rounded">AI Investment Advisor</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-xs text-slate-500">
+                                2 hours ago
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-xs font-medium">
+                                <div class="flex items-center justify-end gap-2 opacity-80 group-hover:opacity-100 transition-opacity">
+                                    <button class="text-slate-400 hover:text-primary p-1.5 hover:bg-slate-100 rounded-md transition-colors" title="View Full">
+                                        <iconify-icon icon="lucide:eye" width="16"></iconify-icon>
+                                    </button>
+                                    <button class="text-red-500 hover:text-red-700 p-1.5 hover:bg-red-50 rounded-md transition-colors" title="Reject">
+                                        <iconify-icon icon="lucide:x" width="16"></iconify-icon>
+                                    </button>
+                                    <button class="text-green-600 hover:text-green-700 p-1.5 hover:bg-green-50 rounded-md transition-colors" title="Approve">
+                                        <iconify-icon icon="lucide:check" width="16"></iconify-icon>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Row 2: Description Change -->
+                        <tr class="hover:bg-slate-50/50 transition-colors group">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="h-8 w-8 rounded bg-emerald-50 flex items-center justify-center text-emerald-600 flex-shrink-0">
+                                        <iconify-icon icon="lucide:leaf" width="16"></iconify-icon>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="text-sm font-medium text-slate-900">Green Energy Market</div>
+                                        <div class="text-[11px] text-slate-500">ID: #8901</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <img class="h-6 w-6 rounded-full object-cover" src="https://i.pravatar.cc/150?u=sarah" alt="">
+                                    <div class="ml-2 text-xs font-medium text-slate-700">Sarah Johnson</div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-medium bg-purple-50 text-purple-700 ring-1 ring-inset ring-purple-600/10">
+                                    Description Change
+                                </span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center text-xs gap-2 max-w-xs">
+                                    <span class="text-slate-400 truncate w-24">A platform for...</span>
+                                    <iconify-icon icon="lucide:arrow-right" class="text-slate-300 flex-shrink-0" width="12"></iconify-icon>
+                                    <span class="font-medium text-slate-900 truncate flex-1">An innovative marketplace connecting...</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-xs text-slate-500">
+                                5 hours ago
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-xs font-medium">
+                                <div class="flex items-center justify-end gap-2 opacity-80 group-hover:opacity-100 transition-opacity">
+                                    <button class="text-slate-400 hover:text-primary p-1.5 hover:bg-slate-100 rounded-md transition-colors" title="View Full">
+                                        <iconify-icon icon="lucide:eye" width="16"></iconify-icon>
+                                    </button>
+                                    <button class="text-red-500 hover:text-red-700 p-1.5 hover:bg-red-50 rounded-md transition-colors" title="Reject">
+                                        <iconify-icon icon="lucide:x" width="16"></iconify-icon>
+                                    </button>
+                                    <button class="text-green-600 hover:text-green-700 p-1.5 hover:bg-green-50 rounded-md transition-colors" title="Approve">
+                                        <iconify-icon icon="lucide:check" width="16"></iconify-icon>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Row 3: Category Change -->
+                        <tr class="hover:bg-slate-50/50 transition-colors group">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="h-8 w-8 rounded bg-orange-50 flex items-center justify-center text-orange-600 flex-shrink-0">
+                                        <iconify-icon icon="lucide:home" width="16"></iconify-icon>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="text-sm font-medium text-slate-900">Smart Home Hub</div>
+                                        <div class="text-[11px] text-slate-500">ID: #9120</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <img class="h-6 w-6 rounded-full object-cover" src="https://i.pravatar.cc/150?u=mike" alt="">
+                                    <div class="ml-2 text-xs font-medium text-slate-700">Mike Chen</div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-medium bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/10">
+                                    Category Change
+                                </span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center text-xs gap-2">
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] bg-slate-100 text-slate-500 line-through">IoT</span>
+                                    <iconify-icon icon="lucide:arrow-right" class="text-slate-300 flex-shrink-0" width="12"></iconify-icon>
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] bg-indigo-50 text-indigo-700 font-medium border border-indigo-100">Smart Home</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-xs text-slate-500">
+                                Yesterday
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-xs font-medium">
+                                <div class="flex items-center justify-end gap-2 opacity-80 group-hover:opacity-100 transition-opacity">
+                                    <button class="text-slate-400 hover:text-primary p-1.5 hover:bg-slate-100 rounded-md transition-colors" title="View Full">
+                                        <iconify-icon icon="lucide:eye" width="16"></iconify-icon>
+                                    </button>
+                                    <button class="text-red-500 hover:text-red-700 p-1.5 hover:bg-red-50 rounded-md transition-colors" title="Reject">
+                                        <iconify-icon icon="lucide:x" width="16"></iconify-icon>
+                                    </button>
+                                    <button class="text-green-600 hover:text-green-700 p-1.5 hover:bg-green-50 rounded-md transition-colors" title="Approve">
+                                        <iconify-icon icon="lucide:check" width="16"></iconify-icon>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Row 4: Multiple Changes -->
+                        <tr class="hover:bg-slate-50/50 transition-colors group bg-orange-50/30">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="h-8 w-8 rounded bg-rose-50 flex items-center justify-center text-rose-600 flex-shrink-0">
+                                        <iconify-icon icon="lucide:activity" width="16"></iconify-icon>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="text-sm font-medium text-slate-900">Health Tracker App</div>
+                                        <div class="text-[11px] text-slate-500">ID: #8555</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <img class="h-6 w-6 rounded-full object-cover" src="https://i.pravatar.cc/150?u=emily" alt="">
+                                    <div class="ml-2 text-xs font-medium text-slate-700">Emily Davis</div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-medium bg-orange-50 text-orange-700 ring-1 ring-inset ring-orange-600/10">
+                                    Multiple Changes
+                                </span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center text-xs text-slate-600">
+                                    <iconify-icon icon="lucide:layers" class="mr-1.5 text-orange-500" width="14"></iconify-icon>
+                                    3 properties modified
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-xs text-slate-500">
+                                Yesterday
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-xs font-medium">
+                                <div class="flex items-center justify-end gap-2 opacity-80 group-hover:opacity-100 transition-opacity">
+                                    <button class="inline-flex items-center px-2.5 py-1.5 rounded-md text-[11px] font-medium bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 shadow-sm transition-colors">
+                                        Review All
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Row 5: Title Change -->
+                        <tr class="hover:bg-slate-50/50 transition-colors group">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="h-8 w-8 rounded bg-blue-50 flex items-center justify-center text-blue-600 flex-shrink-0">
+                                        <iconify-icon icon="lucide:wrench" width="16"></iconify-icon>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="text-sm font-medium text-slate-900">Local Services Platform</div>
+                                        <div class="text-[11px] text-slate-500">ID: #8112</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <img class="h-6 w-6 rounded-full object-cover" src="https://i.pravatar.cc/150?u=alex" alt="">
+                                    <div class="ml-2 text-xs font-medium text-slate-700">Alex Kim</div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-medium bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-600/10">
+                                    Title Change
+                                </span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center text-xs gap-2">
+                                    <span class="text-slate-400 line-through decoration-slate-300">Local Services</span>
+                                    <iconify-icon icon="lucide:arrow-right" class="text-slate-300 flex-shrink-0" width="12"></iconify-icon>
+                                    <span class="font-medium text-slate-900 bg-green-50 px-1 py-0.5 rounded">Local Services Platform</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-xs text-slate-500">
+                                2 days ago
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-xs font-medium">
+                                <div class="flex items-center justify-end gap-2 opacity-80 group-hover:opacity-100 transition-opacity">
+                                    <button class="text-slate-400 hover:text-primary p-1.5 hover:bg-slate-100 rounded-md transition-colors" title="View Full">
+                                        <iconify-icon icon="lucide:eye" width="16"></iconify-icon>
+                                    </button>
+                                    <button class="text-red-500 hover:text-red-700 p-1.5 hover:bg-red-50 rounded-md transition-colors" title="Reject">
+                                        <iconify-icon icon="lucide:x" width="16"></iconify-icon>
+                                    </button>
+                                    <button class="text-green-600 hover:text-green-700 p-1.5 hover:bg-green-50 rounded-md transition-colors" title="Approve">
+                                        <iconify-icon icon="lucide:check" width="16"></iconify-icon>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Footer Pagination -->
+            <div class="bg-white px-6 py-4 border-t border-slate-100 flex items-center justify-between">
+                <div class="text-xs text-slate-500">
+                    Showing <span class="font-medium text-slate-700">1-5</span> of <span class="font-medium text-slate-700">5</span> pending
+                </div>
+                <div class="flex gap-2">
+                    <button class="px-3 py-1 text-xs font-medium text-slate-400 bg-slate-50 rounded border border-slate-100 cursor-not-allowed">Previous</button>
+                    <button class="px-3 py-1 text-xs font-medium text-slate-600 bg-white rounded border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-colors">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State (Example Structure - Hidden) -->
+        <div class="hidden flex-col items-center justify-center py-20 bg-white border border-slate-200 border-dashed rounded-xl text-center">
+            <div class="h-16 w-16 bg-green-50 rounded-full flex items-center justify-center mb-4 ring-8 ring-green-50/50">
+                <iconify-icon icon="lucide:check" class="text-green-600" width="32"></iconify-icon>
+            </div>
+            <h3 class="text-base font-semibold text-slate-900">No pending edit requests</h3>
+            <p class="mt-1 text-sm text-slate-500 max-w-sm">User-submitted changes will appear here for your review.</p>
+        </div>
+
+    </main>
+
+
+</body></html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crowd Builder - Settings</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; }
+/* Custom Toggle Switch styling */
+.toggle-checkbox:checked {
+right: 0;
+border-color: #6366F1;
+}
+.toggle-checkbox:checked + .toggle-label {
+background-color: #6366F1;
+}
+/* Hide scrollbar for cleaner look if needed */
+.no-scrollbar::-webkit-scrollbar {
+display: none;
+}
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#6366F1',
+'primary-hover': '#4F46E5',
+secondary: '#64748B',
+surface: '#FFFFFF',
+background: '#F9FAFB',
+error: '#EF4444',
+},
+boxShadow: {
+'xs': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+}
+}
+}
+}
+</script></head>
+<body class="bg-background text-slate-600 antialiased min-h-screen pt-16">
+
+    <!-- Top Navbar (Fixed) -->
+    <nav class="fixed top-0 left-0 right-0 h-16 bg-surface border-b border-slate-200 z-50 px-4 sm:px-6 lg:px-8">
+        <div class="h-full max-w-7xl mx-auto flex items-center justify-between">
+            
+            <!-- Left: Logo -->
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold tracking-tighter text-sm shadow-sm">
+                    CB
+                </div>
+                <span class="font-semibold text-slate-900 tracking-tight hidden sm:block">CrowdBuilder</span>
+            </div>
+
+            <!-- Center: Search -->
+            <div class="flex-1 max-w-md mx-4 hidden md:block">
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <iconify-icon icon="lucide:search" class="text-slate-400 group-focus-within:text-primary transition-colors" width="18"></iconify-icon>
+                    </div>
+                    <input type="text" class="block w-full h-10 pl-10 pr-3 rounded-lg bg-slate-50 border-none text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 sm:text-sm transition-all" placeholder="Search ideas, people, or tags...">
+                    <div class="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none">
+                        <kbd class="inline-flex items-center border border-slate-200 rounded px-2 text-xs font-sans font-medium text-slate-400">⌘K</kbd>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Actions -->
+            <div class="flex items-center gap-3 sm:gap-4">
+                <button class="hidden sm:flex items-center justify-center h-9 px-4 rounded-lg bg-primary hover:bg-primary-hover text-white text-xs font-medium transition-colors shadow-xs">
+                    <iconify-icon icon="lucide:plus" width="14" class="mr-1.5"></iconify-icon>
+                    Submit Idea
+                </button>
+                
+                <button class="relative p-2 text-slate-400 hover:text-slate-600 transition-colors rounded-full hover:bg-slate-100">
+                    <iconify-icon icon="lucide:bell" width="20"></iconify-icon>
+                    <span class="absolute top-2 right-2.5 block h-2 w-2 rounded-full bg-error ring-2 ring-white"></span>
+                </button>
+
+                <div class="h-8 w-1px bg-slate-200 mx-1 hidden sm:block"></div>
+
+                <button class="flex items-center gap-2 focus:outline-none">
+                    <img class="h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Profile">
+                    <iconify-icon icon="lucide:chevron-down" width="14" class="text-slate-400 hidden sm:block"></iconify-icon>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-[720px] mx-auto px-4 sm:px-6 py-8">
+        
+        <!-- Page Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-semibold tracking-tight text-slate-900">Settings</h1>
+            <p class="mt-2 text-sm text-slate-500">Manage your account settings and preferences.</p>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="border-b border-slate-200 mb-8">
+            <nav class="-mb-px flex space-x-8 overflow-x-auto no-scrollbar" aria-label="Tabs">
+                <button onclick="switchTab('profile')" id="tab-btn-profile" class="tab-btn border-primary text-primary whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">
+                    Profile
+                </button>
+                <button onclick="switchTab('password')" id="tab-btn-password" class="tab-btn border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">
+                    Password
+                </button>
+                <button onclick="switchTab('notifications')" id="tab-btn-notifications" class="tab-btn border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">
+                    Notifications
+                </button>
+                <button onclick="switchTab('account')" id="tab-btn-account" class="tab-btn border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">
+                    Account
+                </button>
+            </nav>
+        </div>
+
+        <!-- TAB CONTENT: PROFILE -->
+        <div id="tab-content-profile" class="tab-content space-y-8 animate-fade-in">
+            <!-- Avatar Section -->
+            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 pb-8 border-b border-slate-100">
+                <div class="relative group">
+                    <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Current Avatar" class="h-20 w-20 rounded-full object-cover ring-4 ring-slate-50">
+                    <div class="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                        <iconify-icon icon="lucide:camera" class="text-white" width="20"></iconify-icon>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-3 text-center sm:text-left pt-1">
+                    <div>
+                        <h3 class="text-sm font-medium text-slate-900">Profile Picture</h3>
+                        <p class="text-xs text-slate-500 mt-1">JPG, GIF or PNG. Max size of 800K.</p>
+                    </div>
+                    <div class="flex items-center gap-3 justify-center sm:justify-start">
+                        <button type="button" class="bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 font-medium py-1.5 px-3 rounded-md text-xs shadow-sm transition-colors">
+                            Change Avatar
+                        </button>
+                        <button type="button" class="text-error hover:text-red-700 text-xs font-medium transition-colors">
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Form -->
+            <form class="space-y-6">
+                <div class="grid grid-cols-1 gap-6">
+                    <!-- Name -->
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-slate-700">Full Name</label>
+                        <div class="mt-1">
+                            <input type="text" name="name" id="name" value="John Doe" class="block w-full h-12 rounded-lg border-slate-200 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Email (Disabled) -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-slate-700">Email Address</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <iconify-icon icon="lucide:mail" class="text-slate-400" width="16"></iconify-icon>
+                            </div>
+                            <input type="email" name="email" id="email" value="john.doe@example.com" disabled="" class="block w-full h-12 pl-10 pr-10 bg-slate-50 border-slate-200 text-slate-500 rounded-lg cursor-not-allowed sm:text-sm select-none">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <iconify-icon icon="lucide:lock" class="text-slate-400" width="16"></iconify-icon>
+                            </div>
+                        </div>
+                        <p class="mt-1.5 text-xs text-slate-500">Contact support to change your email address.</p>
+                    </div>
+
+                    <!-- Bio -->
+                    <div>
+                        <label for="bio" class="block text-sm font-medium text-slate-700">Bio <span class="text-slate-400 font-normal ml-1">(Optional)</span></label>
+                        <div class="mt-1">
+                            <textarea id="bio" name="bio" rows="4" style="height: 100px;" class="block w-full rounded-lg border-slate-200 shadow-sm focus:border-primary focus:ring-primary sm:text-sm resize-none p-3" placeholder="Tell us a little about yourself..."></textarea>
+                        </div>
+                        <p class="mt-1.5 text-xs text-slate-500">Brief description for your profile. URLs are hyperlinked.</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-end pt-4 border-t border-slate-100">
+                    <button type="submit" class="inline-flex justify-center items-center py-2.5 px-6 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- TAB CONTENT: PASSWORD -->
+        <div id="tab-content-password" class="tab-content hidden space-y-6">
+            <div class="bg-slate-50 rounded-lg p-4 border border-slate-100 flex gap-3 items-start mb-6">
+                <iconify-icon icon="lucide:shield-check" class="text-slate-400 mt-0.5" width="20"></iconify-icon>
+                <div class="text-sm text-slate-600">
+                    <p class="font-medium text-slate-900">Secure your account</p>
+                    <p class="mt-0.5">Password must be at least 8 characters and include a number or symbol.</p>
+                </div>
+            </div>
+
+            <form class="space-y-6">
+                <div>
+                    <label for="current-password" class="block text-sm font-medium text-slate-700">Current Password</label>
+                    <input type="password" id="current-password" class="mt-1 block w-full h-12 rounded-lg border-slate-200 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
+                </div>
+
+                <div>
+                    <label for="new-password" class="block text-sm font-medium text-slate-700">New Password</label>
+                    <input type="password" id="new-password" class="mt-1 block w-full h-12 rounded-lg border-slate-200 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
+                    <!-- Strength Meter -->
+                    <div class="mt-2 flex items-center gap-2">
+                        <div class="h-1 flex-1 bg-slate-100 rounded-full overflow-hidden">
+                            <div class="h-full w-2/3 bg-yellow-400 rounded-full"></div>
+                        </div>
+                        <span class="text-xs font-medium text-yellow-600">Medium</span>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="confirm-password" class="block text-sm font-medium text-slate-700">Confirm New Password</label>
+                    <input type="password" id="confirm-password" class="mt-1 block w-full h-12 rounded-lg border-slate-200 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
+                </div>
+
+                <div class="flex justify-end pt-4">
+                    <button type="submit" class="inline-flex justify-center items-center py-2.5 px-6 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all">
+                        Update Password
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- TAB CONTENT: NOTIFICATIONS -->
+        <div id="tab-content-notifications" class="tab-content hidden space-y-8">
+            <div>
+                <h3 class="text-base font-semibold text-slate-900 mb-6">Email Notifications</h3>
+                
+                <div class="space-y-6">
+                    <!-- Item 1: Mandatory -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-medium text-slate-900 opacity-60">Idea approved</span>
+                            <span class="text-xs text-slate-500">Get notified when your idea is approved for development.</span>
+                        </div>
+                        <!-- Toggle (Disabled Checked) -->
+                        <div class="relative inline-block w-11 h-6 align-middle select-none opacity-60 cursor-not-allowed">
+                            <input type="checkbox" checked="" disabled="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-slate-200 appearance-none cursor-not-allowed">
+                            <label class="toggle-label block overflow-hidden h-6 rounded-full bg-primary cursor-not-allowed"></label>
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-100">
+
+                    <!-- Item 2 -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-medium text-slate-900">New comment on your idea</span>
+                            <span class="text-xs text-slate-500">Receive an email when someone comments on your submission.</span>
+                        </div>
+                        <!-- Toggle (Checked) -->
+                        <div class="relative inline-block w-11 h-6 align-middle select-none transition duration-200 ease-in">
+                            <input type="checkbox" id="toggle2" checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-slate-200 appearance-none cursor-pointer transition-all duration-300">
+                            <label for="toggle2" class="toggle-label block overflow-hidden h-6 rounded-full bg-slate-200 cursor-pointer transition-colors duration-300"></label>
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-100">
+
+                    <!-- Item 3 -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-medium text-slate-900">New reply to your comment</span>
+                            <span class="text-xs text-slate-500">Receive an email when someone replies to your discussion.</span>
+                        </div>
+                        <div class="relative inline-block w-11 h-6 align-middle select-none transition duration-200 ease-in">
+                            <input type="checkbox" id="toggle3" checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-slate-200 appearance-none cursor-pointer transition-all duration-300">
+                            <label for="toggle3" class="toggle-label block overflow-hidden h-6 rounded-full bg-slate-200 cursor-pointer transition-colors duration-300"></label>
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-100">
+
+                    <!-- Item 4 (Unchecked) -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-medium text-slate-900">New votes daily digest</span>
+                            <span class="text-xs text-slate-500">A daily summary of votes on your ideas.</span>
+                        </div>
+                        <div class="relative inline-block w-11 h-6 align-middle select-none transition duration-200 ease-in">
+                            <input type="checkbox" id="toggle4" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-slate-200 appearance-none cursor-pointer transition-all duration-300 right-auto left-0 border-slate-200">
+                            <label for="toggle4" class="toggle-label block overflow-hidden h-6 rounded-full bg-slate-200 cursor-pointer transition-colors duration-300"></label>
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-100">
+
+                    <!-- Item 5: Mandatory -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-medium text-slate-900 opacity-60">Document requests</span>
+                            <span class="text-xs text-slate-500">Administrative requests regarding your account.</span>
+                        </div>
+                        <div class="relative inline-block w-11 h-6 align-middle select-none opacity-60 cursor-not-allowed">
+                            <input type="checkbox" checked="" disabled="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-slate-200 appearance-none cursor-not-allowed">
+                            <label class="toggle-label block overflow-hidden h-6 rounded-full bg-primary cursor-not-allowed"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end pt-8">
+                    <button type="submit" class="inline-flex justify-center items-center py-2.5 px-6 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all">
+                        Save Preferences
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: ACCOUNT -->
+        <div id="tab-content-account" class="tab-content hidden space-y-8">
+            <div>
+                <h3 class="text-base font-semibold text-slate-900 mb-6">Account Actions</h3>
+                
+                <div class="rounded-xl border border-red-200 bg-red-50/50 p-6">
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
+                        <div class="max-w-xl">
+                            <h3 class="text-base font-semibold text-red-700">Delete Account</h3>
+                            <div class="mt-2 text-sm text-red-600/80">
+                                <p>This action is permanent and cannot be undone. All your personal data, ideas, and comments will be permanently deleted from our servers.</p>
+                            </div>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <button type="button" class="inline-flex items-center justify-center px-4 py-2.5 border border-transparent font-medium rounded-lg text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm shadow-sm transition-colors whitespace-nowrap">
+                                Delete My Account
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Export Data (Bonus to fill space nicely) -->
+            <div class="pt-6 border-t border-slate-100">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-sm font-medium text-slate-900">Export Data</h3>
+                        <p class="mt-1 text-xs text-slate-500">Download a copy of your personal data.</p>
+                    </div>
+                    <button type="button" class="inline-flex items-center px-4 py-2 border border-slate-300 shadow-sm text-sm font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 focus:outline-none">
+                        <iconify-icon icon="lucide:download" class="mr-2 -ml-1 text-slate-400" width="16"></iconify-icon>
+                        Export
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Tab Logic Script -->
+    <script>
+        function switchTab(tabId) {
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Remove active styles from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-primary', 'text-primary');
+                btn.classList.add('border-transparent', 'text-slate-500', 'hover:text-slate-700', 'hover:border-slate-300');
+            });
+
+            // Show selected tab content
+            document.getElementById('tab-content-' + tabId).classList.remove('hidden');
+            
+            // Add active styles to selected button
+            const activeBtn = document.getElementById('tab-btn-' + tabId);
+            activeBtn.classList.remove('border-transparent', 'text-slate-500', 'hover:text-slate-700', 'hover:border-slate-300');
+            activeBtn.classList.add('border-primary', 'text-primary');
+        }
+    </script>
+
+</body></html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notifications - Crowd Builder</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; }
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+.glass-effect {
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(10px);
+}
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#6366F1', // Indigo
+'primary-hover': '#4F46E5',
+secondary: '#64748B', // Slate
+background: '#F9FAFB',
+surface: '#FFFFFF',
+slate: {
+50: '#F8FAFC',
+100: '#F1F5F9',
+200: '#E2E8F0',
+300: '#CBD5E1',
+400: '#94A3B8',
+500: '#64748B',
+600: '#475569',
+700: '#334155',
+800: '#1E293B',
+900: '#0F172A',
+}
+},
+fontFamily: {
+sans: ['Inter', 'sans-serif'],
+}
+}
+}
+}
+</script></head>
+<body class="bg-background text-slate-600 antialiased min-h-screen pt-16">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 h-16 bg-surface border-b border-slate-200 z-40 px-4 sm:px-6 lg:px-8 glass-effect">
+        <div class="h-full max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Left: Logo -->
+            <div class="flex items-center gap-2">
+                <a href="#" class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold tracking-tighter text-sm shadow-sm hover:opacity-90 transition-opacity">
+                    CB
+                </a>
+                <span class="font-semibold text-slate-900 tracking-tight hidden sm:block">CrowdBuilder</span>
+            </div>
+
+            <!-- Center: Search -->
+            <div class="flex-1 max-w-md mx-4 hidden md:block">
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <iconify-icon icon="lucide:search" class="text-slate-400 group-focus-within:text-primary transition-colors" width="18"></iconify-icon>
+                    </div>
+                    <input type="text" class="block w-full h-10 pl-10 pr-3 rounded-lg bg-slate-50 border-none text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 sm:text-sm transition-all hover:bg-slate-100 focus:bg-white" placeholder="Search...">
+                </div>
+            </div>
+
+            <!-- Right: Actions -->
+            <div class="flex items-center gap-3 sm:gap-4">
+                <button class="hidden sm:flex items-center justify-center h-9 px-4 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-medium transition-colors shadow-sm">
+                    <iconify-icon icon="lucide:plus" width="14" class="mr-1.5"></iconify-icon>
+                    Submit Idea
+                </button>
+                
+                <button class="relative p-2 text-primary bg-primary/5 rounded-full hover:bg-primary/10 transition-colors">
+                    <iconify-icon icon="lucide:bell" width="20"></iconify-icon>
+                    <span class="absolute top-2 right-2.5 block h-2 w-2 rounded-full bg-primary ring-2 ring-white"></span>
+                </button>
+
+                <div class="h-8 w-1px bg-slate-200 mx-1 hidden sm:block"></div>
+
+                <button class="flex items-center gap-2 focus:outline-none group">
+                    <img class="h-8 w-8 rounded-full ring-2 ring-white object-cover shadow-sm group-hover:ring-primary/20 transition-all" src="https://i.pravatar.cc/150?u=user_88" alt="Profile">
+                    <iconify-icon icon="lucide:chevron-down" class="text-slate-400 hidden sm:block group-hover:text-slate-600" width="16"></iconify-icon>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Page Header -->
+        <div class="flex items-end justify-between mb-8">
+            <div>
+                <div class="flex items-center gap-3 mb-1">
+                    <h1 class="text-2xl font-semibold tracking-tight text-slate-900">Notifications</h1>
+                    <span class="inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold text-white bg-primary rounded-full">3</span>
+                </div>
+                <p class="text-sm text-slate-500">Stay updated on your ideas and activity.</p>
+            </div>
+            <button class="hidden sm:flex items-center text-sm font-medium text-slate-500 hover:text-primary transition-colors">
+                <iconify-icon icon="lucide:check-check" class="mr-1.5" width="16"></iconify-icon>
+                Mark all as read
+            </button>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex space-x-2 mb-6 overflow-x-auto pb-2 scrollbar-hide">
+            <button class="flex items-center px-4 py-2 rounded-full bg-slate-900 text-white text-xs font-medium shadow-sm ring-1 ring-slate-900/5 transition-all">
+                All <span class="ml-2 bg-slate-700 text-slate-200 py-0.5 px-1.5 rounded-full text-[10px]">12</span>
+            </button>
+            <button class="flex items-center px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 text-xs font-medium hover:bg-slate-50 hover:border-slate-300 transition-all whitespace-nowrap">
+                Votes <span class="ml-2 bg-orange-100 text-orange-700 py-0.5 px-1.5 rounded-full text-[10px]">4</span>
+            </button>
+            <button class="flex items-center px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 text-xs font-medium hover:bg-slate-50 hover:border-slate-300 transition-all whitespace-nowrap">
+                Comments <span class="ml-2 bg-blue-100 text-blue-700 py-0.5 px-1.5 rounded-full text-[10px]">5</span>
+            </button>
+            <button class="flex items-center px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 text-xs font-medium hover:bg-slate-50 hover:border-slate-300 transition-all whitespace-nowrap">
+                Admin <span class="ml-2 bg-indigo-100 text-indigo-700 py-0.5 px-1.5 rounded-full text-[10px]">2</span>
+            </button>
+            <button class="flex items-center px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 text-xs font-medium hover:bg-slate-50 hover:border-slate-300 transition-all whitespace-nowrap">
+                Documents <span class="ml-2 bg-emerald-100 text-emerald-700 py-0.5 px-1.5 rounded-full text-[10px]">1</span>
+            </button>
+        </div>
+
+        <!-- Notification List -->
+        <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden divide-y divide-slate-100">
+            
+            <!-- Item 1: Vote (Unread) -->
+            <div class="group relative flex gap-4 p-5 hover:bg-slate-50 transition-colors cursor-pointer">
+                <div class="absolute top-6 right-5 h-2.5 w-2.5 rounded-full bg-primary ring-2 ring-white z-10"></div>
+                
+                <div class="flex-shrink-0 mt-1">
+                    <div class="h-10 w-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 ring-1 ring-orange-100">
+                        <iconify-icon icon="lucide:arrow-up" width="20"></iconify-icon>
+                    </div>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex justify-between items-start">
+                        <p class="text-sm font-semibold text-slate-900 truncate">Your idea received 10 new votes</p>
+                        <span class="text-xs text-slate-400 whitespace-nowrap ml-2">2h ago</span>
+                    </div>
+                    <p class="text-sm text-slate-600 mt-0.5">
+                        Great momentum on <span class="font-medium text-slate-900 group-hover:text-primary transition-colors">AI Investment Advisor</span>. You are trending in FinTech.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 2: Comment (Unread) -->
+            <div class="group relative flex gap-4 p-5 hover:bg-slate-50 transition-colors cursor-pointer bg-slate-50/30">
+                <div class="absolute top-6 right-5 h-2.5 w-2.5 rounded-full bg-primary ring-2 ring-white z-10"></div>
+                
+                <div class="flex-shrink-0 mt-1">
+                    <div class="h-10 w-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 ring-1 ring-blue-100">
+                        <iconify-icon icon="lucide:message-circle" width="20"></iconify-icon>
+                    </div>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex justify-between items-start">
+                        <p class="text-sm font-semibold text-slate-900">John Smith commented on your idea</p>
+                        <span class="text-xs text-slate-400 whitespace-nowrap ml-2">5h ago</span>
+                    </div>
+                    <p class="text-sm text-slate-600 mt-0.5 line-clamp-2">
+                        "This looks like a solid proposal, but have you considered the regulatory impact of..." on <span class="font-medium text-slate-900 group-hover:text-primary transition-colors">Green Energy Marketplace</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 3: Document (Unread) -->
+            <div class="group relative flex gap-4 p-5 hover:bg-slate-50 transition-colors cursor-pointer">
+                <div class="absolute top-6 right-5 h-2.5 w-2.5 rounded-full bg-primary ring-2 ring-white z-10"></div>
+                
+                <div class="flex-shrink-0 mt-1">
+                    <div class="h-10 w-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 ring-1 ring-emerald-100">
+                        <iconify-icon icon="lucide:file-text" width="20"></iconify-icon>
+                    </div>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex justify-between items-start">
+                        <p class="text-sm font-semibold text-slate-900">Document request: Business Plan required</p>
+                        <span class="text-xs text-slate-400 whitespace-nowrap ml-2">Yesterday</span>
+                    </div>
+                    <p class="text-sm text-slate-600 mt-0.5">
+                        Compliance team has requested a document for <span class="font-medium text-slate-900 group-hover:text-primary transition-colors">AI Investment Advisor</span>. Please upload by Jan 25.
+                    </p>
+                    <div class="mt-2">
+                        <button class="inline-flex items-center text-xs font-medium text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-md transition-colors border border-emerald-100">
+                            Upload Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4: Admin (Read) -->
+            <div class="group relative flex gap-4 p-5 hover:bg-slate-50 transition-colors cursor-pointer opacity-75 hover:opacity-100">
+                <div class="flex-shrink-0 mt-1">
+                    <div class="h-10 w-10 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 ring-1 ring-indigo-100">
+                        <iconify-icon icon="lucide:shield-check" width="20"></iconify-icon>
+                    </div>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex justify-between items-start">
+                        <p class="text-sm font-semibold text-slate-800">Your idea has been approved!</p>
+                        <span class="text-xs text-slate-400 whitespace-nowrap ml-2">Yesterday</span>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-0.5">
+                        <span class="font-medium text-slate-700 group-hover:text-primary transition-colors">Smart Home Hub</span> has passed initial screening and is now public for voting.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 5: Vote (Read) -->
+            <div class="group relative flex gap-4 p-5 hover:bg-slate-50 transition-colors cursor-pointer opacity-75 hover:opacity-100">
+                <div class="flex-shrink-0 mt-1">
+                    <div class="h-10 w-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 ring-1 ring-orange-100">
+                        <iconify-icon icon="lucide:trophy" width="20"></iconify-icon>
+                    </div>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex justify-between items-start">
+                        <p class="text-sm font-semibold text-slate-800">Milestone: 100 votes reached!</p>
+                        <span class="text-xs text-slate-400 whitespace-nowrap ml-2">2 days ago</span>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-0.5">
+                        Congratulations! <span class="font-medium text-slate-700 group-hover:text-primary transition-colors">AI Investment Advisor</span> has unlocked the 'Rising Star' badge.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 6: Comment (Read) -->
+            <div class="group relative flex gap-4 p-5 hover:bg-slate-50 transition-colors cursor-pointer opacity-75 hover:opacity-100">
+                <div class="flex-shrink-0 mt-1">
+                    <div class="h-10 w-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 ring-1 ring-blue-100">
+                        <iconify-icon icon="lucide:reply" width="20"></iconify-icon>
+                    </div>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex justify-between items-start">
+                        <p class="text-sm font-semibold text-slate-800">Sarah Johnson replied to your comment</p>
+                        <span class="text-xs text-slate-400 whitespace-nowrap ml-2">3 days ago</span>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-0.5">
+                        "Thanks for the feedback! We are planning to implement that feature in Q3..." on <span class="font-medium text-slate-700 group-hover:text-primary transition-colors">Health Tracker App</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 7: Admin (Read) -->
+            <div class="group relative flex gap-4 p-5 hover:bg-slate-50 transition-colors cursor-pointer opacity-75 hover:opacity-100">
+                <div class="flex-shrink-0 mt-1">
+                    <div class="h-10 w-10 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 ring-1 ring-indigo-100">
+                        <iconify-icon icon="lucide:file-edit" width="20"></iconify-icon>
+                    </div>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex justify-between items-start">
+                        <p class="text-sm font-semibold text-slate-800">Changes requested for your idea</p>
+                        <span class="text-xs text-slate-400 whitespace-nowrap ml-2">4 days ago</span>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-0.5">
+                        Moderators have requested clarification on the revenue model for <span class="font-medium text-slate-700 group-hover:text-primary transition-colors">Local Services Platform</span>.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Empty State (Hidden) -->
+        <div class="hidden flex flex-col items-center justify-center py-16 bg-white border border-slate-200 border-dashed rounded-xl mt-8">
+            <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4 text-slate-400">
+                <iconify-icon icon="lucide:bell-off" width="28"></iconify-icon>
+            </div>
+            <h3 class="text-base font-semibold text-slate-900 mb-1">No notifications yet</h3>
+            <p class="text-sm text-slate-500 max-w-xs text-center">When there's activity on your ideas or account, you'll see it here.</p>
+        </div>
+
+        <!-- Bottom Loader/Pagination -->
+        <div class="mt-8 text-center">
+            <button class="text-xs font-medium text-slate-400 hover:text-slate-600 transition-colors">
+                Load older notifications
+            </button>
+        </div>
+
+    </main>
+
+
+</body></html>

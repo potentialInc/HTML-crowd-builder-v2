@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saved Ideas - Crowd Builder</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; }
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+/* Smooth fade for icon swap on bookmark button */
+.bookmark-btn .icon-default { opacity: 1; transform: scale(1); transition: all 0.2s ease; }
+.bookmark-btn .icon-hover { opacity: 0; transform: scale(0.8); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.5); transition: all 0.2s ease; }
+.bookmark-btn:hover .icon-default { opacity: 0; transform: scale(0.8); }
+.bookmark-btn:hover .icon-hover { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#6366F1',
+'primary-hover': '#4F46E5',
+'vote-orange': '#FF6154',
+background: '#F9FAFB',
+surface: '#FFFFFF',
+slate: {
+50: '#F8FAFC',
+100: '#F1F5F9',
+200: '#E2E8F0',
+300: '#CBD5E1',
+400: '#94A3B8',
+500: '#64748B',
+600: '#475569',
+700: '#334155',
+800: '#1E293B',
+900: '#0F172A',
+}
+},
+boxShadow: {
+'card': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',
+'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025)',
+}
+}
+}
+}
+</script></head>
+<body class="bg-background text-slate-600 antialiased min-h-screen pt-16">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 h-16 bg-surface border-b border-slate-200 z-40 px-4 sm:px-6 lg:px-8">
+        <div class="h-full max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Left: Logo -->
+            <div class="flex items-center gap-2">
+                <a href="#" class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold tracking-tighter text-sm shadow-sm hover:opacity-90 transition-opacity">
+                    CB
+                </a>
+                <span class="font-semibold text-slate-900 tracking-tight hidden sm:block">CrowdBuilder</span>
+            </div>
+
+            <!-- Center: Search -->
+            <div class="flex-1 max-w-md mx-4 hidden md:block">
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <iconify-icon icon="lucide:search" class="text-slate-400 group-focus-within:text-primary transition-colors" width="18"></iconify-icon>
+                    </div>
+                    <input type="text" class="block w-full h-10 pl-10 pr-3 rounded-lg bg-slate-50 border-none text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 sm:text-sm transition-all" placeholder="Search ideas, investors, or categories...">
+                </div>
+            </div>
+
+            <!-- Right: Actions -->
+            <div class="flex items-center gap-3 sm:gap-4">
+                <button class="hidden sm:flex items-center justify-center h-9 px-4 rounded-lg bg-primary hover:bg-primary-hover text-white text-xs font-medium transition-colors shadow-sm">
+                    <iconify-icon icon="lucide:plus" width="14" class="mr-1.5"></iconify-icon>
+                    Submit Idea
+                </button>
+                
+                <button class="relative p-2 text-slate-400 hover:text-slate-600 transition-colors rounded-full hover:bg-slate-100">
+                    <iconify-icon icon="lucide:bell" width="20"></iconify-icon>
+                    <span class="absolute top-2 right-2.5 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+                </button>
+
+                <div class="h-8 w-1px bg-slate-200 mx-1 hidden sm:block"></div>
+
+                <button class="flex items-center gap-2 focus:outline-none group">
+                    <img class="h-8 w-8 rounded-full ring-2 ring-white object-cover shadow-sm group-hover:ring-primary/20 transition-all" src="https://i.pravatar.cc/150?u=user_88" alt="Profile">
+                    <iconify-icon icon="lucide:chevron-down" class="text-slate-400 hidden sm:block group-hover:text-slate-600" width="16"></iconify-icon>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Page Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 border-b border-slate-200 pb-6">
+            <div>
+                <div class="flex items-center gap-3 mb-2">
+                    <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">Saved Ideas</h1>
+                    <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold border border-slate-200">
+                        4 saved
+                    </span>
+                </div>
+                <p class="text-sm text-slate-500 max-w-lg">
+                    Review the investment opportunities you've bookmarked. Track their progress or remove them from your list.
+                </p>
+            </div>
+
+            <!-- Sort Dropdown -->
+            <div class="flex items-center gap-3">
+                <span class="text-xs font-medium text-slate-500 hidden sm:block">Sort by:</span>
+                <div class="relative">
+                    <select class="appearance-none bg-white border border-slate-200 text-slate-700 text-sm font-medium rounded-lg pl-3 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 shadow-sm cursor-pointer transition-all hover:border-slate-300 w-44">
+                        <option>Recently Saved</option>
+                        <option>Most Voted</option>
+                        <option>Most Discussed</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
+                        <iconify-icon icon="lucide:chevron-down" width="16"></iconify-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Saved Ideas Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Idea Card 1 -->
+            <div class="group bg-white rounded-xl border border-slate-200 shadow-card hover:shadow-card-hover hover:border-primary/30 transition-all duration-300 flex flex-col h-full relative overflow-hidden">
+                <div class="p-5 flex flex-col h-full">
+                    <!-- Card Top -->
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="inline-flex items-center px-2 py-1 rounded text-[10px] font-medium bg-indigo-50 text-indigo-700 border border-indigo-100">
+                            FinTech
+                        </span>
+                        <button class="bookmark-btn relative w-8 h-8 rounded-full bg-slate-50 text-primary hover:text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center -mr-2 -mt-2 focus:outline-none" title="Remove bookmark">
+                            <iconify-icon icon="lucide:bookmark" class="icon-default" width="18" style="fill: currentColor;"></iconify-icon>
+                            <iconify-icon icon="lucide:x" class="icon-hover" width="18"></iconify-icon>
+                        </button>
+                    </div>
+
+                    <!-- Content -->
+                    <a href="#" class="block mb-4 group-hover:opacity-80 transition-opacity">
+                        <h3 class="text-lg font-semibold text-slate-900 tracking-tight leading-snug mb-2">AI-Powered Investment Advisor</h3>
+                        <p class="text-sm text-slate-500 line-clamp-2">Automated portfolio management using advanced machine learning algorithms to predict market trends.</p>
+                    </a>
+
+                    <!-- Author -->
+                    <div class="flex items-center gap-2 mb-6">
+                        <img src="https://i.pravatar.cc/150?u=1" alt="John Smith" class="w-6 h-6 rounded-full ring-2 ring-white shadow-sm">
+                        <span class="text-xs font-medium text-slate-600">John Smith</span>
+                        <span class="text-slate-300 mx-1">•</span>
+                        <span class="text-xs text-slate-400">Founder</span>
+                    </div>
+
+                    <div class="mt-auto">
+                        <!-- Stats Row -->
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
+                            <div class="flex items-center gap-4">
+                                <!-- Votes (Product Hunt Style) -->
+                                <button class="flex flex-col items-center justify-center w-12 h-14 rounded-lg border border-slate-200 bg-white hover:border-vote-orange/30 group/vote transition-all">
+                                    <iconify-icon icon="lucide:triangle" class="text-slate-400 group-hover/vote:text-vote-orange transition-colors" width="12"></iconify-icon>
+                                    <span class="text-xs font-bold text-slate-700 mt-0.5 group-hover/vote:text-vote-orange transition-colors">234</span>
+                                </button>
+                                
+                                <div class="flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-slate-700 transition-colors cursor-pointer">
+                                    <iconify-icon icon="lucide:message-square" width="16"></iconify-icon>
+                                    42
+                                </div>
+                            </div>
+                            
+                            <button class="h-9 px-4 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 text-slate-700 text-xs font-medium transition-all shadow-sm">
+                                View Idea
+                            </button>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="flex items-center justify-between text-[11px] text-slate-400 font-medium">
+                            <span class="flex items-center gap-1.5">
+                                <iconify-icon icon="lucide:clock" width="12"></iconify-icon>
+                                Saved 2 days ago
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Idea Card 2 -->
+            <div class="group bg-white rounded-xl border border-slate-200 shadow-card hover:shadow-card-hover hover:border-primary/30 transition-all duration-300 flex flex-col h-full relative overflow-hidden">
+                <div class="p-5 flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="inline-flex items-center px-2 py-1 rounded text-[10px] font-medium bg-rose-50 text-rose-700 border border-rose-100">
+                            Healthcare
+                        </span>
+                        <button class="bookmark-btn relative w-8 h-8 rounded-full bg-slate-50 text-primary hover:text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center -mr-2 -mt-2 focus:outline-none" title="Remove bookmark">
+                            <iconify-icon icon="lucide:bookmark" class="icon-default" width="18" style="fill: currentColor;"></iconify-icon>
+                            <iconify-icon icon="lucide:x" class="icon-hover" width="18"></iconify-icon>
+                        </button>
+                    </div>
+
+                    <a href="#" class="block mb-4 group-hover:opacity-80 transition-opacity">
+                        <h3 class="text-lg font-semibold text-slate-900 tracking-tight leading-snug mb-2">Community Health Tracker</h3>
+                        <p class="text-sm text-slate-500 line-clamp-2">A decentralized platform for tracking local health metrics and resource distribution during crises.</p>
+                    </a>
+
+                    <div class="flex items-center gap-2 mb-6">
+                        <img src="https://i.pravatar.cc/150?u=2" alt="Sarah Lee" class="w-6 h-6 rounded-full ring-2 ring-white shadow-sm">
+                        <span class="text-xs font-medium text-slate-600">Sarah Lee</span>
+                        <span class="text-slate-300 mx-1">•</span>
+                        <span class="text-xs text-slate-400">MD &amp; Tech Lead</span>
+                    </div>
+
+                    <div class="mt-auto">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
+                            <div class="flex items-center gap-4">
+                                <button class="flex flex-col items-center justify-center w-12 h-14 rounded-lg border border-slate-200 bg-white hover:border-vote-orange/30 group/vote transition-all">
+                                    <iconify-icon icon="lucide:triangle" class="text-slate-400 group-hover/vote:text-vote-orange transition-colors" width="12"></iconify-icon>
+                                    <span class="text-xs font-bold text-slate-700 mt-0.5 group-hover/vote:text-vote-orange transition-colors">189</span>
+                                </button>
+                                <div class="flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-slate-700 transition-colors cursor-pointer">
+                                    <iconify-icon icon="lucide:message-square" width="16"></iconify-icon>
+                                    34
+                                </div>
+                            </div>
+                            <button class="h-9 px-4 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 text-slate-700 text-xs font-medium transition-all shadow-sm">
+                                View Idea
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-between text-[11px] text-slate-400 font-medium">
+                            <span class="flex items-center gap-1.5">
+                                <iconify-icon icon="lucide:clock" width="12"></iconify-icon>
+                                Saved 5 days ago
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Idea Card 3 -->
+            <div class="group bg-white rounded-xl border border-slate-200 shadow-card hover:shadow-card-hover hover:border-primary/30 transition-all duration-300 flex flex-col h-full relative overflow-hidden">
+                <div class="p-5 flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="inline-flex items-center px-2 py-1 rounded text-[10px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-100">
+                            Sustainability
+                        </span>
+                        <button class="bookmark-btn relative w-8 h-8 rounded-full bg-slate-50 text-primary hover:text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center -mr-2 -mt-2 focus:outline-none" title="Remove bookmark">
+                            <iconify-icon icon="lucide:bookmark" class="icon-default" width="18" style="fill: currentColor;"></iconify-icon>
+                            <iconify-icon icon="lucide:x" class="icon-hover" width="18"></iconify-icon>
+                        </button>
+                    </div>
+
+                    <a href="#" class="block mb-4 group-hover:opacity-80 transition-opacity">
+                        <h3 class="text-lg font-semibold text-slate-900 tracking-tight leading-snug mb-2">Green Energy Marketplace</h3>
+                        <p class="text-sm text-slate-500 line-clamp-2">Connecting homeowners with solar surplus to local businesses needing renewable energy credits.</p>
+                    </a>
+
+                    <div class="flex items-center gap-2 mb-6">
+                        <img src="https://i.pravatar.cc/150?u=3" alt="Mike Chen" class="w-6 h-6 rounded-full ring-2 ring-white shadow-sm">
+                        <span class="text-xs font-medium text-slate-600">Mike Chen</span>
+                        <span class="text-slate-300 mx-1">•</span>
+                        <span class="text-xs text-slate-400">Engineer</span>
+                    </div>
+
+                    <div class="mt-auto">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
+                            <div class="flex items-center gap-4">
+                                <button class="flex flex-col items-center justify-center w-12 h-14 rounded-lg border border-slate-200 bg-white hover:border-vote-orange/30 group/vote transition-all">
+                                    <iconify-icon icon="lucide:triangle" class="text-slate-400 group-hover/vote:text-vote-orange transition-colors" width="12"></iconify-icon>
+                                    <span class="text-xs font-bold text-slate-700 mt-0.5 group-hover/vote:text-vote-orange transition-colors">156</span>
+                                </button>
+                                <div class="flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-slate-700 transition-colors cursor-pointer">
+                                    <iconify-icon icon="lucide:message-square" width="16"></iconify-icon>
+                                    18
+                                </div>
+                            </div>
+                            <button class="h-9 px-4 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 text-slate-700 text-xs font-medium transition-all shadow-sm">
+                                View Idea
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-between text-[11px] text-slate-400 font-medium">
+                            <span class="flex items-center gap-1.5">
+                                <iconify-icon icon="lucide:clock" width="12"></iconify-icon>
+                                Saved 1 week ago
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Idea Card 4 -->
+            <div class="group bg-white rounded-xl border border-slate-200 shadow-card hover:shadow-card-hover hover:border-primary/30 transition-all duration-300 flex flex-col h-full relative overflow-hidden">
+                <div class="p-5 flex flex-col h-full">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="inline-flex items-center px-2 py-1 rounded text-[10px] font-medium bg-cyan-50 text-cyan-700 border border-cyan-100">
+                            IoT / Hardware
+                        </span>
+                        <button class="bookmark-btn relative w-8 h-8 rounded-full bg-slate-50 text-primary hover:text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center -mr-2 -mt-2 focus:outline-none" title="Remove bookmark">
+                            <iconify-icon icon="lucide:bookmark" class="icon-default" width="18" style="fill: currentColor;"></iconify-icon>
+                            <iconify-icon icon="lucide:x" class="icon-hover" width="18"></iconify-icon>
+                        </button>
+                    </div>
+
+                    <a href="#" class="block mb-4 group-hover:opacity-80 transition-opacity">
+                        <h3 class="text-lg font-semibold text-slate-900 tracking-tight leading-snug mb-2">Smart Home Integration Hub</h3>
+                        <p class="text-sm text-slate-500 line-clamp-2">A universal hardware bridge that unifies all smart home protocols into a single, secure interface.</p>
+                    </a>
+
+                    <div class="flex items-center gap-2 mb-6">
+                        <img src="https://i.pravatar.cc/150?u=4" alt="Emily Davis" class="w-6 h-6 rounded-full ring-2 ring-white shadow-sm">
+                        <span class="text-xs font-medium text-slate-600">Emily Davis</span>
+                        <span class="text-slate-300 mx-1">•</span>
+                        <span class="text-xs text-slate-400">Product Designer</span>
+                    </div>
+
+                    <div class="mt-auto">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
+                            <div class="flex items-center gap-4">
+                                <button class="flex flex-col items-center justify-center w-12 h-14 rounded-lg border border-slate-200 bg-white hover:border-vote-orange/30 group/vote transition-all">
+                                    <iconify-icon icon="lucide:triangle" class="text-slate-400 group-hover/vote:text-vote-orange transition-colors" width="12"></iconify-icon>
+                                    <span class="text-xs font-bold text-slate-700 mt-0.5 group-hover/vote:text-vote-orange transition-colors">312</span>
+                                </button>
+                                <div class="flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-slate-700 transition-colors cursor-pointer">
+                                    <iconify-icon icon="lucide:message-square" width="16"></iconify-icon>
+                                    89
+                                </div>
+                            </div>
+                            <button class="h-9 px-4 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 text-slate-700 text-xs font-medium transition-all shadow-sm">
+                                View Idea
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-between text-[11px] text-slate-400 font-medium">
+                            <span class="flex items-center gap-1.5">
+                                <iconify-icon icon="lucide:clock" width="12"></iconify-icon>
+                                Saved 2 weeks ago
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Empty State Example (Hidden by default, shown for structure) -->
+        <!--
+        <div class="flex flex-col items-center justify-center py-24 text-center">
+            <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-6 text-slate-300">
+                <iconify-icon icon="lucide:bookmark" width="32"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-slate-900 mb-2">No saved ideas yet</h3>
+            <p class="text-sm text-slate-500 max-w-sm mb-8">Browse the marketplace and click the bookmark icon to save ideas that interest you for later review.</p>
+            <button class="h-10 px-6 rounded-lg bg-primary hover:bg-primary-hover text-white text-sm font-medium transition-colors shadow-sm">
+                Browse Ideas
+            </button>
+        </div>
+        -->
+
+    </main>
+
+
+</body></html>

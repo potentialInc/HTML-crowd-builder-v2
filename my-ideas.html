@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Ideas - Crowd Builder</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#6366F1',
+'primary-hover': '#4F46E5',
+secondary: '#64748B',
+surface: '#FFFFFF',
+background: '#F9FAFB',
+slate: {
+50: '#F8FAFC',
+100: '#F1F5F9',
+200: '#E2E8F0',
+300: '#CBD5E1',
+400: '#94A3B8',
+500: '#64748B',
+600: '#475569',
+700: '#334155',
+800: '#1E293B',
+900: '#0F172A',
+}
+},
+boxShadow: {
+'xs': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+'card': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',
+}
+}
+}
+}
+</script></head>
+<body class="bg-background text-slate-600 antialiased min-h-screen pt-16">
+
+    <!-- Top Navbar -->
+    <nav class="fixed top-0 left-0 right-0 h-16 bg-surface border-b border-slate-200 z-40 px-4 sm:px-6 lg:px-8">
+        <div class="h-full max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Left: Logo -->
+            <div class="flex items-center gap-2">
+                <a href="#" class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold tracking-tighter text-sm shadow-sm hover:opacity-90 transition-opacity">
+                    CB
+                </a>
+                <span class="font-semibold text-slate-900 tracking-tight hidden sm:block">CrowdBuilder</span>
+            </div>
+
+            <!-- Center: Search -->
+            <div class="flex-1 max-w-md mx-4 hidden md:block">
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <iconify-icon icon="lucide:search" class="text-slate-400 group-focus-within:text-primary transition-colors" width="18"></iconify-icon>
+                    </div>
+                    <input type="text" class="block w-full h-10 pl-10 pr-3 rounded-lg bg-slate-50 border-none text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 sm:text-sm transition-all" placeholder="Search ideas, investors, or categories...">
+                </div>
+            </div>
+
+            <!-- Right: Actions -->
+            <div class="flex items-center gap-3 sm:gap-4">
+                <button class="hidden sm:flex items-center justify-center h-9 px-4 rounded-lg bg-primary hover:bg-primary-hover text-white text-xs font-medium transition-colors shadow-xs">
+                    <iconify-icon icon="lucide:plus" width="14" class="mr-1.5"></iconify-icon>
+                    Submit Idea
+                </button>
+                
+                <button class="relative p-2 text-slate-400 hover:text-slate-600 transition-colors rounded-full hover:bg-slate-100">
+                    <iconify-icon icon="lucide:bell" width="20"></iconify-icon>
+                    <span class="absolute top-2 right-2.5 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+                </button>
+
+                <div class="h-8 w-1px bg-slate-200 mx-1 hidden sm:block"></div>
+
+                <button class="flex items-center gap-2 focus:outline-none group">
+                    <img class="h-8 w-8 rounded-full ring-2 ring-white object-cover shadow-sm group-hover:ring-primary/20 transition-all" src="https://i.pravatar.cc/150?u=user_88" alt="Profile">
+                    <iconify-icon icon="lucide:chevron-down" class="text-slate-400 hidden sm:block group-hover:text-slate-600" width="16"></iconify-icon>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+        
+        <!-- Header Section -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">My Ideas</h1>
+                <p class="mt-1.5 text-sm text-slate-500">Track and manage all your submitted investment proposals.</p>
+                
+                <!-- Stats Row -->
+                <div class="flex flex-wrap gap-4 mt-4">
+                    <div class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white border border-slate-200 shadow-xs">
+                        <span class="text-xs font-medium text-slate-500">Total</span>
+                        <span class="text-sm font-semibold text-slate-900">4</span>
+                    </div>
+                    <div class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white border border-slate-200 shadow-xs">
+                        <span class="text-xs font-medium text-slate-500">Drafts</span>
+                        <span class="text-sm font-semibold text-slate-900">1</span>
+                    </div>
+                    <div class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white border border-slate-200 shadow-xs">
+                        <span class="text-xs font-medium text-slate-500">Pending</span>
+                        <span class="text-sm font-semibold text-slate-900">1</span>
+                    </div>
+                    <div class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white border border-slate-200 shadow-xs">
+                        <span class="text-xs font-medium text-slate-500">Approved</span>
+                        <span class="text-sm font-semibold text-slate-900">1</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hidden md:block">
+                <button class="flex items-center justify-center h-10 px-4 rounded-lg bg-primary hover:bg-primary-hover text-white text-sm font-medium transition-colors shadow-sm">
+                    <iconify-icon icon="lucide:plus" width="16" class="mr-2"></iconify-icon>
+                    New Proposal
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab Filters -->
+        <div class="border-b border-slate-200 mb-6 overflow-x-auto no-scrollbar">
+            <div class="flex items-center gap-6 min-w-max">
+                <button class="group pb-3 text-sm font-medium text-primary border-b-2 border-primary transition-colors flex items-center gap-2">
+                    All Ideas
+                    <span class="bg-indigo-50 text-indigo-700 py-0.5 px-2 rounded-full text-[10px]">4</span>
+                </button>
+                <button class="group pb-3 text-sm font-medium text-slate-500 border-b-2 border-transparent hover:border-slate-300 hover:text-slate-700 transition-colors flex items-center gap-2">
+                    Drafts
+                    <span class="bg-slate-100 text-slate-600 py-0.5 px-2 rounded-full text-[10px] group-hover:bg-slate-200">1</span>
+                </button>
+                <button class="group pb-3 text-sm font-medium text-slate-500 border-b-2 border-transparent hover:border-slate-300 hover:text-slate-700 transition-colors flex items-center gap-2">
+                    Pending
+                    <span class="bg-amber-50 text-amber-700 py-0.5 px-2 rounded-full text-[10px] group-hover:bg-amber-100">1</span>
+                </button>
+                <button class="group pb-3 text-sm font-medium text-slate-500 border-b-2 border-transparent hover:border-slate-300 hover:text-slate-700 transition-colors flex items-center gap-2">
+                    Approved
+                    <span class="bg-emerald-50 text-emerald-700 py-0.5 px-2 rounded-full text-[10px] group-hover:bg-emerald-100">1</span>
+                </button>
+                <button class="group pb-3 text-sm font-medium text-slate-500 border-b-2 border-transparent hover:border-slate-300 hover:text-slate-700 transition-colors flex items-center gap-2">
+                    Changes Requested
+                    <span class="bg-orange-50 text-orange-700 py-0.5 px-2 rounded-full text-[10px] group-hover:bg-orange-100">1</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Ideas List -->
+        <div class="space-y-4">
+
+            <!-- Card 1: Approved -->
+            <div class="bg-white rounded-xl shadow-card border border-slate-200 p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-primary/30 transition-all group">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-indigo-50 flex-shrink-0 flex items-center justify-center text-primary">
+                        <iconify-icon icon="lucide:bot" width="20"></iconify-icon>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <h3 class="text-base font-semibold text-slate-900 group-hover:text-primary transition-colors cursor-pointer">AI-Powered Investment Advisor</h3>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-100">
+                                Approved
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs text-slate-500">
+                            <span class="font-medium text-slate-700">FinTech</span>
+                            <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+                            <span>Submitted Dec 15, 2024</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto pt-4 md:pt-0 border-t md:border-t-0 border-slate-50">
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-1.5 text-sm font-medium text-slate-700" title="Votes">
+                            <iconify-icon icon="lucide:thumbs-up" class="text-slate-400" width="16"></iconify-icon>
+                            234
+                        </div>
+                        <div class="flex items-center gap-1.5 text-sm font-medium text-slate-700" title="Comments">
+                            <iconify-icon icon="lucide:message-square" class="text-slate-400" width="16"></iconify-icon>
+                            42
+                        </div>
+                    </div>
+                    
+                    <div class="h-8 w-1px bg-slate-200 hidden md:block"></div>
+
+                    <div class="flex items-center gap-2">
+                        <button class="h-8 px-3 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition-colors">
+                            View
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Pending -->
+            <div class="bg-white rounded-xl shadow-card border border-slate-200 p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-slate-300 transition-all">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-rose-50 flex-shrink-0 flex items-center justify-center text-rose-500">
+                        <iconify-icon icon="lucide:activity" width="20"></iconify-icon>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <h3 class="text-base font-semibold text-slate-900 hover:text-primary transition-colors cursor-pointer">Community Health Tracker</h3>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-amber-50 text-amber-700 border border-amber-100">
+                                Pending Review
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs text-slate-500">
+                            <span class="font-medium text-slate-700">Healthcare</span>
+                            <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+                            <span>Submitted Jan 5, 2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto pt-4 md:pt-0 border-t md:border-t-0 border-slate-50">
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-1.5 text-sm font-medium text-slate-700">
+                            <iconify-icon icon="lucide:thumbs-up" class="text-slate-400" width="16"></iconify-icon>
+                            89
+                        </div>
+                        <div class="flex items-center gap-1.5 text-sm font-medium text-slate-700">
+                            <iconify-icon icon="lucide:message-square" class="text-slate-400" width="16"></iconify-icon>
+                            12
+                        </div>
+                    </div>
+                    
+                    <div class="h-8 w-1px bg-slate-200 hidden md:block"></div>
+
+                    <div class="flex items-center gap-2">
+                        <button class="h-8 px-3 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition-colors">
+                            View Status
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Changes Requested -->
+            <div class="bg-white rounded-xl shadow-card border border-slate-200 p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-slate-300 transition-all">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-50 flex-shrink-0 flex items-center justify-center text-emerald-600">
+                        <iconify-icon icon="lucide:leaf" width="20"></iconify-icon>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <h3 class="text-base font-semibold text-slate-900 hover:text-primary transition-colors cursor-pointer">Green Energy Marketplace</h3>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-orange-50 text-orange-700 border border-orange-100">
+                                <iconify-icon icon="lucide:alert-circle" width="10" class="mr-1"></iconify-icon>
+                                Changes Requested
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs text-slate-500">
+                            <span class="font-medium text-slate-700">Sustainability</span>
+                            <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+                            <span>Submitted Jan 10, 2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto pt-4 md:pt-0 border-t md:border-t-0 border-slate-50">
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-1.5 text-sm font-medium text-slate-700">
+                            <iconify-icon icon="lucide:thumbs-up" class="text-slate-400" width="16"></iconify-icon>
+                            156
+                        </div>
+                        <div class="flex items-center gap-1.5 text-sm font-medium text-slate-700">
+                            <iconify-icon icon="lucide:message-square" class="text-slate-400" width="16"></iconify-icon>
+                            28
+                        </div>
+                    </div>
+                    
+                    <div class="h-8 w-1px bg-slate-200 hidden md:block"></div>
+
+                    <div class="flex items-center gap-2">
+                        <button class="h-8 px-3 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-medium transition-colors">
+                            View Feedback
+                        </button>
+                        <button class="h-8 px-3 rounded-lg bg-primary hover:bg-primary-hover text-white text-xs font-medium transition-colors shadow-xs">
+                            Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Draft -->
+            <div class="bg-slate-50 rounded-xl border border-dashed border-slate-300 p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex items-start gap-4 opacity-75">
+                    <div class="w-10 h-10 rounded-lg bg-slate-200 flex-shrink-0 flex items-center justify-center text-slate-500">
+                        <iconify-icon icon="lucide:file-edit" width="20"></iconify-icon>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <h3 class="text-base font-semibold text-slate-900">Local Services Aggregator</h3>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-slate-200 text-slate-600 border border-slate-300">
+                                Draft
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs text-slate-500">
+                            <span class="font-medium text-slate-700">Service Industry</span>
+                            <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+                            <span>Not submitted</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto pt-4 md:pt-0 border-t md:border-t-0 border-slate-200">
+                    <div class="flex items-center gap-4 opacity-50">
+                        <div class="flex items-center gap-1.5 text-sm font-medium text-slate-700">
+                            <iconify-icon icon="lucide:thumbs-up" class="text-slate-400" width="16"></iconify-icon>
+                            -
+                        </div>
+                        <div class="flex items-center gap-1.5 text-sm font-medium text-slate-700">
+                            <iconify-icon icon="lucide:message-square" class="text-slate-400" width="16"></iconify-icon>
+                            -
+                        </div>
+                    </div>
+                    
+                    <div class="h-8 w-1px bg-slate-200 hidden md:block"></div>
+
+                    <div class="flex items-center gap-2">
+                        <button class="h-8 px-3 rounded-lg bg-white border border-slate-200 hover:text-red-600 hover:border-red-200 hover:bg-red-50 text-slate-500 text-xs font-medium transition-colors">
+                            Delete
+                        </button>
+                        <button class="h-8 px-3 rounded-lg bg-white border border-slate-300 hover:bg-white hover:border-primary hover:text-primary text-slate-700 text-xs font-medium transition-colors shadow-sm">
+                            Continue Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Empty State (Hidden, for demonstration) -->
+        <!-- 
+        <div class="text-center py-20 bg-white rounded-xl border border-slate-200 shadow-sm mt-8">
+            <div class="w-16 h-16 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-4 text-primary">
+                <iconify-icon icon="lucide:lightbulb" width="32"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-slate-900">You haven't submitted any ideas yet</h3>
+            <p class="text-sm text-slate-500 mt-2 max-w-sm mx-auto">Share your innovative concepts with the community and get funding for your next big project.</p>
+            <button class="mt-6 h-10 px-6 rounded-lg bg-primary hover:bg-primary-hover text-white text-sm font-medium transition-colors shadow-sm inline-flex items-center gap-2">
+                <iconify-icon icon="lucide:plus" width="16"></iconify-icon>
+                Submit Your First Idea
+            </button>
+        </div>
+        -->
+        
+    </main>
+
+
+</body></html>

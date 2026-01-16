@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crowd Builder - Featured Ideas</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; }
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+.fade-in { animation: fadeIn 0.3s ease-out forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+.drag-ghost { opacity: 0.5; background: #F8FAFC; border: 1px dashed #94A3B8; }
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#6366F1',
+'primary-hover': '#4F46E5',
+secondary: '#64748B',
+surface: '#FFFFFF',
+background: '#F9FAFB',
+vote: '#FF6154', // Product Hunt Orange
+success: '#10B981',
+warning: '#F59E0B',
+error: '#EF4444',
+},
+fontFamily: {
+sans: ['Inter', 'sans-serif'],
+},
+boxShadow: {
+'xs': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+'card': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',
+'card-hover': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+}
+}
+}
+}
+</script></head>
+<body class="bg-background text-slate-600 antialiased min-h-screen pt-16">
+
+    <!-- Top Navbar -->
+    <nav class="fixed top-0 left-0 right-0 h-16 bg-surface border-b border-slate-200 z-40 px-4 sm:px-6 lg:px-8">
+        <div class="h-full max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Left: Logo -->
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold tracking-tighter text-sm shadow-sm">
+                    CB
+                </div>
+                <span class="font-semibold text-slate-900 tracking-tight hidden sm:block">CrowdBuilder</span>
+                <span class="px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-500 border border-slate-200 ml-2">Admin</span>
+            </div>
+
+            <!-- Center: Search -->
+            <div class="flex-1 max-w-md mx-4 hidden md:block">
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <iconify-icon icon="lucide:search" class="text-slate-400 group-focus-within:text-primary transition-colors" width="18"></iconify-icon>
+                    </div>
+                    <input type="text" class="block w-full h-10 pl-10 pr-3 rounded-lg bg-slate-50 border-none text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 sm:text-sm transition-all" placeholder="Search users, ideas, or documents...">
+                </div>
+            </div>
+
+            <!-- Right: Actions -->
+            <div class="flex items-center gap-3 sm:gap-4">
+                <button class="hidden sm:flex items-center justify-center h-9 px-4 rounded-lg bg-primary hover:bg-primary-hover text-white text-xs font-medium transition-colors shadow-xs">
+                    <iconify-icon icon="lucide:plus" width="14" class="mr-1.5"></iconify-icon>
+                    Submit Idea
+                </button>
+                
+                <button class="relative p-2 text-slate-400 hover:text-slate-600 transition-colors rounded-full hover:bg-slate-100">
+                    <iconify-icon icon="lucide:bell" width="20"></iconify-icon>
+                    <span class="absolute top-2 right-2.5 block h-2 w-2 rounded-full bg-error ring-2 ring-white"></span>
+                </button>
+
+                <div class="h-8 w-1px bg-slate-200 mx-1 hidden sm:block"></div>
+
+                <button class="flex items-center gap-2 focus:outline-none">
+                    <img class="h-8 w-8 rounded-full ring-2 ring-white object-cover shadow-sm" src="https://i.pravatar.cc/150?u=admin_user" alt="Profile">
+                    <iconify-icon icon="lucide:chevron-down" class="text-slate-400 hidden sm:block" width="16"></iconify-icon>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+        
+        <!-- Header -->
+        <div class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+                <h1 class="text-3xl font-semibold tracking-tight text-slate-900">Featured Ideas</h1>
+                <p class="mt-1.5 text-sm text-slate-500">Manage featured content and discovery algorithms on the home feed.</p>
+            </div>
+            <div class="flex gap-2">
+                <button class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 text-xs font-medium rounded-lg hover:bg-slate-50 transition-colors shadow-xs">
+                    Preview Feed
+                </button>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="border-b border-slate-200 mb-6">
+            <nav class="flex space-x-8" aria-label="Tabs">
+                <button onclick="switchTab('admin-picks')" id="tab-admin-picks" class="tab-btn pb-3 border-b-2 border-primary text-primary font-medium text-sm whitespace-nowrap transition-colors">
+                    Admin Picks
+                </button>
+                <button onclick="switchTab('hot-discuss')" id="tab-hot-discuss" class="tab-btn pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 font-medium text-sm whitespace-nowrap transition-colors">
+                    Hot Discuss
+                </button>
+                <button onclick="switchTab('most-loved')" id="tab-most-loved" class="tab-btn pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 font-medium text-sm whitespace-nowrap transition-colors">
+                    Most Loved
+                </button>
+            </nav>
+        </div>
+
+        <!-- TAB 1: ADMIN PICKS -->
+        <div id="content-admin-picks" class="tab-content fade-in space-y-6">
+            
+            <!-- Instructions/Status -->
+            <div class="bg-indigo-50/50 border border-indigo-100 rounded-lg p-4 flex items-start gap-3">
+                <iconify-icon icon="lucide:info" class="text-primary mt-0.5" width="18"></iconify-icon>
+                <div>
+                    <h3 class="text-sm font-semibold text-slate-900">Manual Selection</h3>
+                    <p class="text-xs text-slate-600 mt-1">These 5 ideas will appear at the top of the "Featured" carousel. Drag to reorder.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-card border border-slate-200 overflow-hidden">
+                <div class="px-4 py-3 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+                    <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-500">Current Selection (5/10)</h3>
+                    <button class="text-primary hover:text-primary-hover text-xs font-medium">Clear All</button>
+                </div>
+
+                <!-- Sortable List -->
+                <ul class="divide-y divide-slate-100" id="sortable-list">
+                    <!-- Item 1 -->
+                    <li class="flex items-center justify-between p-3 hover:bg-slate-50 group transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="cursor-move text-slate-300 group-hover:text-slate-500 p-1">
+                                <iconify-icon icon="lucide:grip-vertical" width="16"></iconify-icon>
+                            </div>
+                            <span class="text-xs font-mono text-slate-400 w-4">01</span>
+                            
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center text-primary">
+                                    <iconify-icon icon="lucide:zap" width="18"></iconify-icon>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <p class="text-sm font-semibold text-slate-900">SolarFlow Battery</p>
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-green-100 text-green-700 border border-green-200">Hardware</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500">Submitted by Alice M. • 2d ago</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <div class="flex items-center gap-1.5 text-vote font-medium text-sm">
+                                <iconify-icon icon="lucide:triangle" width="12" class="fill-current"></iconify-icon>
+                                428
+                            </div>
+                            <button class="p-1.5 text-slate-300 hover:text-error hover:bg-red-50 rounded transition-all" title="Remove">
+                                <iconify-icon icon="lucide:x" width="16"></iconify-icon>
+                            </button>
+                        </div>
+                    </li>
+
+                    <!-- Item 2 -->
+                    <li class="flex items-center justify-between p-3 hover:bg-slate-50 group transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="cursor-move text-slate-300 group-hover:text-slate-500 p-1">
+                                <iconify-icon icon="lucide:grip-vertical" width="16"></iconify-icon>
+                            </div>
+                            <span class="text-xs font-mono text-slate-400 w-4">02</span>
+                            
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center text-purple-600">
+                                    <iconify-icon icon="lucide:bot" width="18"></iconify-icon>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <p class="text-sm font-semibold text-slate-900">LegalAI Assistant</p>
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 border border-slate-200">SaaS</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500">Submitted by LegalTech Inc • 5d ago</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <div class="flex items-center gap-1.5 text-vote font-medium text-sm">
+                                <iconify-icon icon="lucide:triangle" width="12" class="fill-current"></iconify-icon>
+                                312
+                            </div>
+                            <button class="p-1.5 text-slate-300 hover:text-error hover:bg-red-50 rounded transition-all">
+                                <iconify-icon icon="lucide:x" width="16"></iconify-icon>
+                            </button>
+                        </div>
+                    </li>
+
+                    <!-- Item 3 -->
+                    <li class="flex items-center justify-between p-3 hover:bg-slate-50 group transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="cursor-move text-slate-300 group-hover:text-slate-500 p-1">
+                                <iconify-icon icon="lucide:grip-vertical" width="16"></iconify-icon>
+                            </div>
+                            <span class="text-xs font-mono text-slate-400 w-4">03</span>
+                            
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center text-emerald-600">
+                                    <iconify-icon icon="lucide:leaf" width="18"></iconify-icon>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <p class="text-sm font-semibold text-slate-900">Urban Vertical Farm</p>
+                                        <span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-green-100 text-green-700 border border-green-200">AgriTech</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500">Submitted by EcoGrow • 1w ago</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <div class="flex items-center gap-1.5 text-vote font-medium text-sm">
+                                <iconify-icon icon="lucide:triangle" width="12" class="fill-current"></iconify-icon>
+                                890
+                            </div>
+                            <button class="p-1.5 text-slate-300 hover:text-error hover:bg-red-50 rounded transition-all">
+                                <iconify-icon icon="lucide:x" width="16"></iconify-icon>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- Add Section -->
+                <div class="p-4 bg-slate-50 border-t border-slate-200">
+                    <label class="block text-xs font-medium text-slate-700 mb-2">Add to Featured</label>
+                    <div class="flex gap-2">
+                        <div class="relative flex-1 group">
+                            <iconify-icon icon="lucide:search" class="absolute left-3 top-2.5 text-slate-400" width="16"></iconify-icon>
+                            <input type="text" placeholder="Search approved ideas..." class="w-full pl-9 pr-4 py-2 bg-white border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+                            
+                            <!-- Search Result Dropdown Mockup -->
+                            <div class="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-xl border border-slate-100 hidden group-focus-within:block z-10 p-1">
+                                <div class="px-2 py-1.5 text-[10px] uppercase font-semibold text-slate-400">Suggestions</div>
+                                <div class="flex items-center justify-between p-2 hover:bg-slate-50 rounded-md cursor-pointer">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-6 h-6 rounded bg-orange-100 text-orange-600 flex items-center justify-center"><iconify-icon icon="lucide:rocket" width="12"></iconify-icon></div>
+                                        <span class="text-sm font-medium text-slate-900">Mars Colonization Kit</span>
+                                    </div>
+                                    <button class="text-primary text-xs font-medium hover:underline">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-hover shadow-sm transition-colors">
+                            Save Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: HOT DISCUSS -->
+        <div id="content-hot-discuss" class="tab-content hidden fade-in space-y-6">
+            
+            <div class="bg-slate-900 rounded-xl p-6 text-white shadow-card flex items-center justify-between overflow-hidden relative">
+                <div class="relative z-10">
+                    <h2 class="text-lg font-semibold flex items-center gap-2">
+                        <iconify-icon icon="lucide:message-circle" class="text-primary"></iconify-icon>
+                        Trending Discussions
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1">Algorithmically selected based on comment velocity over the last 7 days.</p>
+                </div>
+                <div class="text-right relative z-10">
+                    <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs text-slate-300">
+                        <span class="block w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                        Updated 2m ago
+                    </span>
+                </div>
+                <!-- Decoration -->
+                <div class="absolute right-0 top-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-card border border-slate-200 overflow-hidden">
+                <table class="min-w-full divide-y divide-slate-100">
+                    <thead class="bg-slate-50/50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider w-16">Rank</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Idea</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Comments (7d)</th>
+                            <th class="px-6 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Votes</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-slate-100">
+                        <!-- Row 1 -->
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900">#1</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center text-slate-500 text-xs font-bold">CR</div>
+                                    <div>
+                                        <div class="text-sm font-medium text-slate-900">Crypto Recovery Tool</div>
+                                        <div class="text-xs text-slate-500">FinTech</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center gap-2 text-sm font-medium text-slate-700">
+                                    <iconify-icon icon="lucide:message-square" class="text-slate-400" width="14"></iconify-icon>
+                                    142
+                                    <span class="text-xs text-green-600 font-medium bg-green-50 px-1.5 rounded">+24%</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm text-slate-500">1,204</td>
+                        </tr>
+                        <!-- Row 2 -->
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900">#2</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded bg-indigo-100 flex items-center justify-center text-indigo-500 text-xs font-bold">VR</div>
+                                    <div>
+                                        <div class="text-sm font-medium text-slate-900">Remote Team VR</div>
+                                        <div class="text-xs text-slate-500">Workplace</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center gap-2 text-sm font-medium text-slate-700">
+                                    <iconify-icon icon="lucide:message-square" class="text-slate-400" width="14"></iconify-icon>
+                                    98
+                                    <span class="text-xs text-green-600 font-medium bg-green-50 px-1.5 rounded">+12%</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm text-slate-500">850</td>
+                        </tr>
+                        <!-- Row 3 -->
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900">#3</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded bg-pink-100 flex items-center justify-center text-pink-500 text-xs font-bold">AI</div>
+                                    <div>
+                                        <div class="text-sm font-medium text-slate-900">Generative UI Builder</div>
+                                        <div class="text-xs text-slate-500">DevTools</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center gap-2 text-sm font-medium text-slate-700">
+                                    <iconify-icon icon="lucide:message-square" class="text-slate-400" width="14"></iconify-icon>
+                                    86
+                                    <span class="text-xs text-red-500 font-medium bg-red-50 px-1.5 rounded">-5%</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm text-slate-500">2,100</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="bg-slate-50 px-6 py-3 border-t border-slate-200 text-center">
+                    <button class="text-xs font-medium text-slate-500 hover:text-slate-800 transition-colors">View Top 50</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: MOST LOVED -->
+        <div id="content-most-loved" class="tab-content hidden fade-in space-y-6">
+            
+            <div class="bg-gradient-to-r from-vote to-orange-400 rounded-xl p-6 text-white shadow-lg shadow-orange-200 flex items-center justify-between overflow-hidden relative">
+                <div class="relative z-10">
+                    <h2 class="text-lg font-semibold flex items-center gap-2">
+                        <iconify-icon icon="lucide:heart" class="text-white fill-white"></iconify-icon>
+                        Most Loved
+                    </h2>
+                    <p class="text-white/80 text-sm mt-1">High vote velocity combined with total approval rating.</p>
+                </div>
+                <div class="text-right relative z-10">
+                     <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/20 border border-white/20 text-xs text-white">
+                        <iconify-icon icon="lucide:clock" width="12"></iconify-icon>
+                        Updated Hourly
+                    </span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-card border border-slate-200 overflow-hidden">
+                <table class="min-w-full divide-y divide-slate-100">
+                    <thead class="bg-slate-50/50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider w-16">Rank</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Idea</th>
+                            <th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Votes</th>
+                            <th class="px-6 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider">Trending (7d)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-slate-100">
+                        <!-- Row 1 -->
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900">#1</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded bg-teal-100 flex items-center justify-center text-teal-600 text-xs font-bold">OD</div>
+                                    <div>
+                                        <div class="text-sm font-medium text-slate-900">Clean Ocean Drone</div>
+                                        <div class="text-xs text-slate-500">Hardware</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center gap-1.5 text-vote font-bold text-sm">
+                                    <iconify-icon icon="lucide:triangle" width="12" class="fill-current"></iconify-icon>
+                                    3,402
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right">
+                                <span class="inline-flex items-center gap-1 text-sm font-medium text-green-600 bg-green-50 px-2 py-1 rounded-full">
+                                    <iconify-icon icon="lucide:trending-up" width="14"></iconify-icon>
+                                    +452
+                                </span>
+                            </td>
+                        </tr>
+                        <!-- Row 2 -->
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900">#2</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded bg-blue-100 flex items-center justify-center text-blue-600 text-xs font-bold">NC</div>
+                                    <div>
+                                        <div class="text-sm font-medium text-slate-900">No-Code App Builder 2.0</div>
+                                        <div class="text-xs text-slate-500">SaaS</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center gap-1.5 text-vote font-bold text-sm">
+                                    <iconify-icon icon="lucide:triangle" width="12" class="fill-current"></iconify-icon>
+                                    2,890
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right">
+                                <span class="inline-flex items-center gap-1 text-sm font-medium text-green-600 bg-green-50 px-2 py-1 rounded-full">
+                                    <iconify-icon icon="lucide:trending-up" width="14"></iconify-icon>
+                                    +310
+                                </span>
+                            </td>
+                        </tr>
+                        <!-- Row 3 -->
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900">#3</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded bg-yellow-100 flex items-center justify-center text-yellow-600 text-xs font-bold">SP</div>
+                                    <div>
+                                        <div class="text-sm font-medium text-slate-900">Smart Pet Feeder</div>
+                                        <div class="text-xs text-slate-500">Consumer</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center gap-1.5 text-vote font-bold text-sm">
+                                    <iconify-icon icon="lucide:triangle" width="12" class="fill-current"></iconify-icon>
+                                    1,900
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right">
+                                <span class="inline-flex items-center gap-1 text-sm font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded-full">
+                                    <iconify-icon icon="lucide:minus" width="14"></iconify-icon>
+                                    +80
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function switchTab(tabId) {
+            // Hide all content
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            // Show selected content
+            document.getElementById('content-' + tabId).classList.remove('hidden');
+
+            // Reset tab styles
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-primary', 'text-primary');
+                btn.classList.add('border-transparent', 'text-slate-500');
+            });
+
+            // Set active tab style
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.remove('border-transparent', 'text-slate-500');
+            activeBtn.classList.add('border-primary', 'text-primary');
+        }
+    </script>
+
+</body></html>
