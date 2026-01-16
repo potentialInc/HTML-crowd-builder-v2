@@ -171,10 +171,16 @@ sans: ['Inter', 'sans-serif'],
     const email = emailInput.value;
     const password = passwordInput.value;
 
+    // User demo account
     if (email === 'demo@demo.com' && password === '1234') {
       window.location.href = './user-dashboard.html';
-    } else {
-      alert('Demo account: demo@demo.com / 1234');
+    }
+    // Admin demo account
+    else if (email === 'admin@admin.com' && password === '1234') {
+      window.location.href = './admin-dashboard.html';
+    }
+    else {
+      alert('Demo accounts:\n\nUser: demo@demo.com / 1234\nAdmin: admin@admin.com / 1234');
     }
   });
 })();
