@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up - CrowdBuilder</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; }
+/* Custom checkbox transition */
+.checkbox-box { transition: all 0.2s ease; }
+input:checked + .checkbox-label .checkbox-box {
+background-color: #6366F1;
+border-color: #6366F1;
+}
+input:checked + .checkbox-label .checkbox-box iconify-icon {
+opacity: 1;
+transform: scale(1);
+}
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#6366F1',
+primaryHover: '#4F46E5',
+secondary: '#64748B',
+surface: '#FFFFFF',
+background: '#F9FAFB',
+success: '#10B981',
+warning: '#F59E0B',
+error: '#EF4444'
+},
+fontFamily: {
+sans: ['Inter', 'sans-serif'],
+}
+}
+}
+}
+</script></head>
+<body class="bg-background antialiased h-screen w-full overflow-hidden flex">
+
+    <!-- LEFT PANEL (40%) -->
+    <div class="hidden lg:flex lg:w-[40%] bg-gradient-to-br from-[#6366F1] to-[#4338CA] relative flex-col justify-center px-12 xl:px-16 text-white overflow-hidden">
+        <!-- Decorative patterns -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+            <div class="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-white blur-[120px]"></div>
+            <div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-black blur-[90px]"></div>
+        </div>
+
+        <div class="relative z-10 space-y-10">
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary font-bold tracking-tighter text-xl shadow-lg">
+                    CB
+                </div>
+                <span class="font-bold text-2xl tracking-tight text-white">CrowdBuilder</span>
+            </div>
+
+            <div class="space-y-4">
+                <h1 class="text-4xl font-bold tracking-tight text-white leading-tight">Join the community</h1>
+                <p class="text-lg text-white/80 font-normal leading-relaxed max-w-md">
+                    Start investing in groundbreaking ideas today.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT PANEL (60%) -->
+    <div class="w-full lg:w-[60%] bg-white h-full flex flex-col items-center justify-center px-6 md:px-12 overflow-y-auto relative">
+        
+        <!-- Mobile Logo (Visible only on small screens) -->
+        <div class="flex lg:hidden absolute top-8 left-6 items-center gap-2">
+            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold tracking-tighter text-sm shadow-sm">
+                CB
+            </div>
+            <span class="font-bold text-lg tracking-tight text-slate-900">CrowdBuilder</span>
+        </div>
+
+        <div class="w-full max-w-[420px] py-8">
+            
+            <!-- Step Indicator -->
+            <div class="mb-12">
+                <div class="flex items-center justify-between relative">
+                    <!-- Connecting Line -->
+                    <div class="absolute top-1/2 left-0 w-full h-[2px] -translate-y-1/2 bg-slate-100 -z-10"></div>
+                    <div class="absolute top-1/2 left-0 w-1/2 h-[2px] -translate-y-1/2 bg-primary/20 -z-10"></div>
+
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center gap-2 bg-white px-2">
+                        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white shadow-sm ring-4 ring-white">
+                            <span class="text-xs font-bold">1</span>
+                        </div>
+                        <span class="text-xs font-medium text-primary absolute -bottom-6 w-max">Verify Age</span>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center gap-2 bg-white px-2">
+                        <div class="w-8 h-8 rounded-full border-2 border-slate-200 bg-white flex items-center justify-center text-slate-400 ring-4 ring-white">
+                            <span class="text-xs font-medium">2</span>
+                        </div>
+                        <span class="text-xs font-medium text-slate-400 absolute -bottom-6 w-max">Create Account</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Container -->
+            <div class="text-center space-y-6">
+                
+                <!-- Warning Icon -->
+                <div class="flex justify-center">
+                    <div class="w-16 h-16 rounded-full bg-warning/10 flex items-center justify-center text-warning mb-2">
+                        <iconify-icon icon="lucide:alert-triangle" width="32" stroke-width="1.5"></iconify-icon>
+                    </div>
+                </div>
+
+                <!-- Headings -->
+                <div class="space-y-3">
+                    <h2 class="text-2xl font-semibold text-slate-900 tracking-tight">Age Verification Required</h2>
+                    <p class="text-sm text-slate-500 leading-relaxed mx-auto max-w-xs">
+                        This platform requires users to be 18 years or older for legal contract purposes. By proceeding, you confirm your eligibility.
+                    </p>
+                </div>
+
+                <!-- Form Area -->
+                <div class="mt-8 space-y-8">
+                    
+                    <!-- Custom Large Checkbox -->
+                    <label class="cursor-pointer group block text-left bg-slate-50 rounded-xl p-4 border border-slate-200 hover:border-primary/30 transition-colors">
+                        <input type="checkbox" class="peer sr-only">
+                        <div class="checkbox-label flex items-start gap-4">
+                            <div class="checkbox-box w-6 h-6 flex-shrink-0 border-2 border-slate-300 rounded-md bg-white flex items-center justify-center text-white shadow-sm group-hover:border-primary/50">
+                                <iconify-icon icon="lucide:check" width="16" stroke-width="3" class="opacity-0 transform scale-50 transition-all duration-200"></iconify-icon>
+                            </div>
+                            <div class="flex-1 pt-0.5">
+                                <p class="text-sm font-medium text-slate-900 select-none">I confirm that I am 18 years of age or older</p>
+                                <p class="text-xs text-slate-500 mt-1 select-none">I understand providing false information is a violation of terms.</p>
+                            </div>
+                        </div>
+                    </label>
+
+                    <!-- Actions -->
+                    <div class="space-y-4">
+                        <button type="button" class="w-full h-12 bg-primary/50 cursor-not-allowed text-white rounded-lg font-medium text-sm flex items-center justify-center gap-2 shadow-none transition-all">
+                            Continue
+                        </button>
+                        
+                        <a href="#" class="block text-sm font-medium text-primary hover:text-primaryHover transition-colors">
+                            ← Back to login
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-12 text-center border-t border-slate-100 pt-6">
+                <p class="text-sm text-slate-500">
+                    Already have an account? 
+                    <a href="#" class="font-medium text-primary hover:text-primaryHover transition-colors">Sign in</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+
+</body></html>

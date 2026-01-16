@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - CrowdBuilder</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; }
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#6366F1',
+primaryHover: '#4F46E5',
+secondary: '#64748B',
+surface: '#FFFFFF',
+background: '#F9FAFB',
+success: '#10B981',
+warning: '#F59E0B',
+error: '#EF4444'
+},
+fontFamily: {
+sans: ['Inter', 'sans-serif'],
+}
+}
+}
+}
+</script></head>
+<body class="bg-background text-slate-900 antialiased min-h-screen">
+
+    <!-- TOP NAVBAR -->
+    <nav class="h-16 bg-surface border-b border-slate-200 fixed w-full top-0 z-40">
+        <div class="h-full px-6 flex items-center justify-between max-w-[1400px] mx-auto">
+            
+            <!-- Left: Logo -->
+            <div class="flex items-center gap-3 w-48">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold tracking-tighter text-sm shadow-sm">
+                    CB
+                </div>
+                <span class="font-bold text-lg tracking-tight text-slate-900">CrowdBuilder</span>
+            </div>
+
+            <!-- Center: Search -->
+            <div class="flex-1 flex justify-center">
+                <div class="relative w-[400px]">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                        <iconify-icon icon="lucide:search" width="18" stroke-width="1.5"></iconify-icon>
+                    </div>
+                    <input type="text" class="block w-full pl-10 pr-3 py-2 border border-slate-200 rounded-lg leading-5 bg-slate-50 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/50 focus:border-primary/50 sm:text-sm transition-colors" placeholder="Search...">
+                </div>
+            </div>
+
+            <!-- Right: Actions -->
+            <div class="flex items-center justify-end gap-6 w-48 relative">
+                
+                <!-- Admin Menu Button & Dropdown Container -->
+                <div class="relative group">
+                    <button class="flex items-center gap-2 text-sm font-medium text-primary hover:text-primaryHover focus:outline-none transition-colors">
+                        Admin
+                        <iconify-icon icon="lucide:chevron-down" width="16" stroke-width="1.5"></iconify-icon>
+                    </button>
+
+                    <!-- DROPDOWN MENU (Expanded for display) -->
+                    <div class="absolute right-0 top-full mt-3 w-60 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50">
+                        <!-- Item 1: Active -->
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-primary bg-primary/5 border-l-2 border-primary">
+                            <iconify-icon icon="lucide:layout-dashboard" width="18" stroke-width="1.5"></iconify-icon>
+                            Overview Dashboard
+                        </a>
+                        <!-- Item 2 -->
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:lightbulb" width="18" stroke-width="1.5"></iconify-icon>
+                            Pending Ideas
+                        </a>
+                        <!-- Item 3 -->
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:check-circle" width="18" stroke-width="1.5"></iconify-icon>
+                            Edit Approvals
+                        </a>
+                        <!-- Item 4 -->
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:star" width="18" stroke-width="1.5"></iconify-icon>
+                            Featured Ideas
+                        </a>
+                        <!-- Item 5 -->
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:file-text" width="18" stroke-width="1.5"></iconify-icon>
+                            Document Management
+                        </a>
+                        <!-- Item 6 -->
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:bar-chart-2" width="18" stroke-width="1.5"></iconify-icon>
+                            Reports Center
+                        </a>
+                        <!-- Item 7 -->
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:users" width="18" stroke-width="1.5"></iconify-icon>
+                            User Management
+                        </a>
+                        <!-- Item 8 -->
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:shield" width="18" stroke-width="1.5"></iconify-icon>
+                            Admin Management
+                        </a>
+                        <!-- Item 9 -->
+                        <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:layout" width="18" stroke-width="1.5"></iconify-icon>
+                            CMS
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Notification -->
+                <button class="relative text-slate-400 hover:text-slate-600 transition-colors">
+                    <iconify-icon icon="lucide:bell" width="20" stroke-width="1.5"></iconify-icon>
+                    <span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-error text-[10px] font-bold text-white ring-2 ring-white">5</span>
+                </button>
+
+                <!-- Avatar -->
+                <div class="h-9 w-9 rounded-full bg-slate-200 border-2 border-white ring-1 ring-slate-100 flex items-center justify-center text-slate-600 font-semibold text-xs shadow-sm">
+                    AD
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE CONTENT -->
+    <main class="pt-24 pb-12 px-6">
+        <div class="max-w-[1200px] mx-auto space-y-8">
+            
+            <!-- Page Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold tracking-tight text-slate-900">Admin Dashboard</h1>
+                    <p class="text-base text-slate-500 mt-2">Platform overview and pending tasks</p>
+                </div>
+                
+                <!-- Quick Actions (Placed in header row) -->
+                <div class="flex items-center gap-3">
+                    <button class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-sm">
+                        <iconify-icon icon="lucide:file-text" width="16"></iconify-icon>
+                        Review Documents
+                    </button>
+                    <button class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-sm">
+                        <iconify-icon icon="lucide:flag" width="16"></iconify-icon>
+                        Check Reports
+                    </button>
+                    <button class="inline-flex items-center gap-2 px-4 py-2 bg-primary rounded-lg text-sm font-medium text-white hover:bg-primaryHover transition-all shadow-sm shadow-primary/20">
+                        <iconify-icon icon="lucide:lightbulb" width="16"></iconify-icon>
+                        Review Pending Ideas
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stat Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Card 1: Pending Ideas -->
+                <div class="bg-surface rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-500 mb-1">Pending Ideas</p>
+                            <h3 class="text-3xl font-bold text-slate-900 tracking-tight">12</h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-warning/10 flex items-center justify-center text-warning">
+                            <iconify-icon icon="lucide:lightbulb" width="20" stroke-width="1.5"></iconify-icon>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Pending Documents -->
+                <div class="bg-surface rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-500 mb-1">Pending Documents</p>
+                            <h3 class="text-3xl font-bold text-slate-900 tracking-tight">8</h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-warning/10 flex items-center justify-center text-warning">
+                            <iconify-icon icon="lucide:file-text" width="20" stroke-width="1.5"></iconify-icon>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Pending Reports -->
+                <div class="bg-surface rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-500 mb-1">Pending Reports</p>
+                            <h3 class="text-3xl font-bold text-slate-900 tracking-tight">3</h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-error/10 flex items-center justify-center text-error">
+                            <iconify-icon icon="lucide:flag" width="20" stroke-width="1.5"></iconify-icon>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Active Users -->
+                <div class="bg-surface rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-500 mb-1">Active Users</p>
+                            <h3 class="text-3xl font-bold text-slate-900 tracking-tight">1,247</h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                            <iconify-icon icon="lucide:users" width="20" stroke-width="1.5"></iconify-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity Section -->
+            <div class="bg-surface rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
+                    <h2 class="text-lg font-semibold text-slate-900 tracking-tight">Recent Activity</h2>
+                    <a href="#" class="text-sm font-medium text-primary hover:text-primaryHover transition-colors flex items-center gap-1">
+                        View all activity
+                        <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
+                    </a>
+                </div>
+                
+                <div class="divide-y divide-slate-100">
+                    <!-- Item 1 -->
+                    <div class="px-6 py-4 flex items-center gap-4 hover:bg-slate-50 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-warning/10 flex items-center justify-center text-warning shrink-0">
+                            <iconify-icon icon="lucide:lightbulb" width="18" stroke-width="1.5"></iconify-icon>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-slate-900 truncate">New idea 'EcoTrack' submitted by Sarah M.</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Idea Submission • Pending Review</p>
+                        </div>
+                        <span class="text-xs text-slate-400 whitespace-nowrap">2h ago</span>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="px-6 py-4 flex items-center gap-4 hover:bg-slate-50 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-error/10 flex items-center justify-center text-error shrink-0">
+                            <iconify-icon icon="lucide:flag" width="18" stroke-width="1.5"></iconify-icon>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-slate-900 truncate">Report filed on 'CryptoBot'</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Content Violation • High Priority</p>
+                        </div>
+                        <span class="text-xs text-slate-400 whitespace-nowrap">3h ago</span>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="px-6 py-4 flex items-center gap-4 hover:bg-slate-50 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
+                            <iconify-icon icon="lucide:file-text" width="18" stroke-width="1.5"></iconify-icon>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-slate-900 truncate">Document uploaded by Mark T.</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Business Plan v2.pdf • 4.2 MB</p>
+                        </div>
+                        <span class="text-xs text-slate-400 whitespace-nowrap">5h ago</span>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="px-6 py-4 flex items-center gap-4 hover:bg-slate-50 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
+                            <iconify-icon icon="lucide:ban" width="18" stroke-width="1.5"></iconify-icon>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-slate-900 truncate">User @spammer123 was banned</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Terms Violation • System Action</p>
+                        </div>
+                        <span class="text-xs text-slate-400 whitespace-nowrap">1d ago</span>
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="px-6 py-4 flex items-center gap-4 hover:bg-slate-50 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-success/10 flex items-center justify-center text-success shrink-0">
+                            <iconify-icon icon="lucide:check" width="18" stroke-width="1.5"></iconify-icon>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-slate-900 truncate">Idea 'FocusFlow' approved as Original</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Approval • Published</p>
+                        </div>
+                        <span class="text-xs text-slate-400 whitespace-nowrap">1d ago</span>
+                    </div>
+                </div>
+                
+                <!-- Bottom Action -->
+                <div class="bg-slate-50 px-6 py-3 border-t border-slate-100 flex justify-center">
+                    <button class="text-xs font-medium text-slate-500 hover:text-slate-800 transition-colors">
+                        Load more activity
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+
+</body></html>

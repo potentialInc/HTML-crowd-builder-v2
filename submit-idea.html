@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submit New Idea - CrowdBuilder</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; }
+/* Custom scrollbar for text editor if needed */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#6366F1',
+secondary: '#64748B',
+background: '#F9FAFB',
+surface: '#FFFFFF',
+vote: '#FF6154',
+success: '#10B981',
+warning: '#F59E0B',
+error: '#EF4444'
+},
+fontFamily: {
+sans: ['Inter', 'sans-serif'],
+}
+}
+}
+}
+</script></head>
+<body class="bg-background text-secondary antialiased min-h-screen relative pb-24">
+
+    <!-- Top Navbar -->
+    <nav class="fixed top-0 left-0 right-0 h-16 bg-surface border-b border-slate-200 z-40">
+        <div class="max-w-[1400px] mx-auto px-6 h-full flex items-center justify-between gap-4">
+            
+            <!-- Logo -->
+            <div class="flex items-center gap-8 flex-1">
+                <a href="#" class="flex items-center gap-2 group">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold tracking-tighter text-lg shadow-sm">
+                        CB
+                    </div>
+                    <span class="font-semibold text-slate-900 tracking-tight text-lg hidden sm:block">CrowdBuilder</span>
+                </a>
+            </div>
+
+            <!-- Right Actions -->
+            <div class="flex items-center gap-4 relative">
+                <button class="relative p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-full transition-colors">
+                    <iconify-icon icon="lucide:bell" width="20"></iconify-icon>
+                    <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full ring-2 ring-white"></span>
+                </button>
+
+                <div class="h-6 w-px bg-slate-200 hidden sm:block"></div>
+
+                <button class="flex items-center gap-2 focus:outline-none">
+                    <div class="w-9 h-9 bg-indigo-100 text-primary border border-indigo-200 rounded-full flex items-center justify-center font-bold text-sm">
+                        JL
+                    </div>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-[720px] mx-auto pt-24 px-6 mb-20">
+        
+        <!-- Page Header -->
+        <header class="py-8">
+            <a href="#" class="inline-flex items-center gap-1.5 text-slate-500 hover:text-primary transition-colors text-sm font-medium mb-4 group">
+                <iconify-icon icon="lucide:arrow-left" width="16" class="group-hover:-translate-x-0.5 transition-transform"></iconify-icon>
+                Back to Dashboard
+            </a>
+            <h1 class="text-3xl font-bold text-slate-900 tracking-tight mb-2">Submit New Idea</h1>
+            <p class="text-base text-slate-500">Share your entrepreneurship idea with the community.</p>
+        </header>
+
+        <!-- Form Container -->
+        <form class="space-y-12">
+            
+            <!-- SECTION 1: BASIC INFORMATION -->
+            <section>
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-slate-900 inline-block border-b-2 border-primary pb-1 tracking-tight">Basic Information</h3>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Project Name -->
+                    <div class="group">
+                        <label for="project-name" class="block text-sm font-medium text-slate-900 mb-1.5">
+                            Project Name <span class="text-error">*</span>
+                        </label>
+                        <div class="relative">
+                            <input type="text" id="project-name" value="EcoTrack Analytics" class="w-full h-12 px-4 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all shadow-sm" placeholder="Give your idea a name">
+                        </div>
+                        <div class="flex justify-end mt-1.5">
+                            <span class="text-xs text-slate-400 font-medium">18/100</span>
+                        </div>
+                    </div>
+
+                    <!-- Tagline -->
+                    <div>
+                        <label for="tagline" class="block text-sm font-medium text-slate-900 mb-1.5">
+                            Tagline <span class="text-error">*</span>
+                        </label>
+                        <div class="relative">
+                            <input type="text" id="tagline" value="AI-powered supply chain carbon footprint monitoring for SMBs." class="w-full h-12 px-4 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all shadow-sm" placeholder="One-line description of your idea">
+                        </div>
+                        <div class="flex justify-between mt-1.5">
+                            <span class="text-xs text-slate-500">This appears on the idea card in the feed</span>
+                            <span class="text-xs text-slate-400 font-medium">62/150</span>
+                        </div>
+                    </div>
+
+                    <!-- Category -->
+                    <div>
+                        <label for="category" class="block text-sm font-medium text-slate-900 mb-1.5">
+                            Category <span class="text-error">*</span>
+                        </label>
+                        <div class="relative">
+                            <select id="category" class="w-full h-12 px-4 pr-10 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all shadow-sm appearance-none cursor-pointer">
+                                <option value="" disabled="">Select a category</option>
+                                <option value="saas">SaaS</option>
+                                <option value="fintech">Fintech</option>
+                                <option value="ai" selected="">AI/ML</option>
+                                <option value="green">Green Tech</option>
+                                <option value="marketplace">Marketplace</option>
+                                <option value="social">Social</option>
+                                <option value="education">Education</option>
+                            </select>
+                            <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 flex items-center">
+                                <iconify-icon icon="lucide:chevron-down" width="20"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-900 mb-1.5">
+                            Tags (optional)
+                        </label>
+                        <div class="min-h-[48px] px-2 py-1.5 rounded-lg border border-slate-300 bg-white focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/20 transition-all shadow-sm flex flex-wrap gap-2 items-center">
+                            <!-- Sample Tags -->
+                            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm font-medium border border-slate-200">
+                                #AI
+                                <button type="button" class="hover:text-error transition-colors flex items-center"><iconify-icon icon="lucide:x" width="14"></iconify-icon></button>
+                            </span>
+                            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm font-medium border border-slate-200">
+                                #GreenTech
+                                <button type="button" class="hover:text-error transition-colors flex items-center"><iconify-icon icon="lucide:x" width="14"></iconify-icon></button>
+                            </span>
+                            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm font-medium border border-slate-200">
+                                #B2B
+                                <button type="button" class="hover:text-error transition-colors flex items-center"><iconify-icon icon="lucide:x" width="14"></iconify-icon></button>
+                            </span>
+                            
+                            <input type="text" class="flex-1 min-w-[120px] h-8 bg-transparent border-none outline-none text-sm placeholder:text-slate-400" placeholder="Type to add tags...">
+                        </div>
+                        <div class="mt-1.5">
+                            <span class="text-xs text-slate-500">Add up to 10 tags to help people find your idea</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: TELL YOUR STORY -->
+            <section>
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-slate-900 inline-block border-b-2 border-primary pb-1 tracking-tight">Tell Your Story</h3>
+                    <p class="text-sm text-slate-500 mt-2">Describe your idea in detail. What problem does it solve? Who is the target audience?</p>
+                </div>
+
+                <div class="rounded-lg border border-slate-300 bg-white shadow-sm overflow-hidden group focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/20 transition-all">
+                    <!-- Toolbar -->
+                    <div class="flex items-center gap-1 p-2 border-b border-slate-200 bg-slate-50/50">
+                        <button type="button" class="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors" title="Bold">
+                            <iconify-icon icon="lucide:bold" width="18"></iconify-icon>
+                        </button>
+                        <button type="button" class="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors" title="Italic">
+                            <iconify-icon icon="lucide:italic" width="18"></iconify-icon>
+                        </button>
+                        <button type="button" class="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors" title="Underline">
+                            <iconify-icon icon="lucide:underline" width="18"></iconify-icon>
+                        </button>
+                        <div class="w-px h-4 bg-slate-300 mx-1"></div>
+                        <button type="button" class="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors" title="Bullet List">
+                            <iconify-icon icon="lucide:list" width="18"></iconify-icon>
+                        </button>
+                        <button type="button" class="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors" title="Numbered List">
+                            <iconify-icon icon="lucide:list-ordered" width="18"></iconify-icon>
+                        </button>
+                        <div class="w-px h-4 bg-slate-300 mx-1"></div>
+                        <button type="button" class="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors" title="Insert Link">
+                            <iconify-icon icon="lucide:link" width="18"></iconify-icon>
+                        </button>
+                    </div>
+                    
+                    <!-- Text Area -->
+                    <div class="relative">
+                        <textarea class="w-full min-h-[300px] p-4 text-slate-900 resize-y outline-none block" placeholder="Describe your idea in detail. Include the problem you're solving, your solution, target market, and what makes it unique..."></textarea>
+                    </div>
+                </div>
+                <div class="flex justify-end mt-1.5">
+                    <span class="text-xs text-slate-400 font-medium">0/5000</span>
+                </div>
+            </section>
+
+            <!-- SECTION 3: MEDIA -->
+            <section>
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-slate-900 inline-block border-b-2 border-primary pb-1 tracking-tight">Media (Optional)</h3>
+                    <p class="text-sm text-slate-500 mt-2">Add images and video to showcase your idea.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Image Upload -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-900 mb-2">
+                            Images (max 5)
+                        </label>
+                        
+                        <!-- Upload Zone -->
+                        <div class="relative h-40 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50/50 hover:bg-slate-50 hover:border-primary/50 transition-all cursor-pointer flex flex-col items-center justify-center text-center px-4 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-indigo-50 text-primary flex items-center justify-center mb-2">
+                                <iconify-icon icon="lucide:image-plus" width="20"></iconify-icon>
+                            </div>
+                            <p class="text-sm font-medium text-slate-900">Drag images here or click to browse</p>
+                            <p class="text-xs text-slate-500 mt-1">JPG, PNG, WebP. Max 5MB each</p>
+                            <input type="file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" multiple="" accept="image/*">
+                        </div>
+
+                        <!-- Sample Thumbnails -->
+                        <div class="flex gap-4 overflow-x-auto pb-2">
+                            <div class="relative w-20 h-20 rounded-lg overflow-hidden border border-slate-200 group shrink-0">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=100&amp;q=80" alt="Preview 1" class="w-full h-full object-cover">
+                                <button type="button" class="absolute top-1 right-1 w-5 h-5 bg-black/60 hover:bg-error text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all backdrop-blur-sm">
+                                    <iconify-icon icon="lucide:x" width="12"></iconify-icon>
+                                </button>
+                            </div>
+                            <div class="relative w-20 h-20 rounded-lg overflow-hidden border border-slate-200 group shrink-0">
+                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=100&amp;q=80" alt="Preview 2" class="w-full h-full object-cover">
+                                <button type="button" class="absolute top-1 right-1 w-5 h-5 bg-black/60 hover:bg-error text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all backdrop-blur-sm">
+                                    <iconify-icon icon="lucide:x" width="12"></iconify-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Input -->
+                    <div>
+                        <label for="video-url" class="block text-sm font-medium text-slate-900 mb-1.5">
+                            Video (optional)
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-slate-400">
+                                <iconify-icon icon="lucide:youtube" width="20"></iconify-icon>
+                            </div>
+                            <input type="url" id="video-url" class="w-full h-12 pl-10 pr-4 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all shadow-sm" placeholder="https://youtube.com/watch?v=...">
+                        </div>
+                        <div class="mt-1.5">
+                            <span class="text-xs text-slate-500">Paste a YouTube URL to embed your video</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </form>
+    </main>
+
+    <!-- Sticky Action Bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-50">
+        <div class="max-w-[720px] mx-auto px-6 py-4 flex items-center justify-between gap-4">
+            <button type="button" class="px-6 py-2.5 rounded-lg border border-slate-300 text-slate-700 font-medium text-sm hover:bg-slate-50 hover:text-slate-900 transition-all focus:outline-none focus:ring-2 focus:ring-slate-200">
+                Save Draft
+            </button>
+            <button type="button" class="px-6 py-2.5 rounded-lg bg-primary text-white font-medium text-sm hover:bg-indigo-600 shadow-sm hover:shadow transition-all focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-1 flex items-center gap-2">
+                <span>Submit for Review</span>
+                <iconify-icon icon="lucide:arrow-right" width="16"></iconify-icon>
+            </button>
+        </div>
+    </div>
+
+
+</body></html>
