@@ -57,14 +57,14 @@ sans: ['Inter', 'sans-serif'],
             <div class="flex items-center justify-end gap-6 w-48 relative">
                 
                 <!-- Admin Menu Button & Dropdown Container -->
-                <div class="relative group">
-                    <button class="flex items-center gap-2 text-sm font-medium text-primary hover:text-primaryHover focus:outline-none transition-colors">
+                <div class="relative">
+                    <button id="adminMenuBtn" class="flex items-center gap-2 text-sm font-medium text-primary hover:text-primaryHover focus:outline-none transition-colors">
                         Admin
                         <iconify-icon icon="lucide:chevron-down" width="16" stroke-width="1.5"></iconify-icon>
                     </button>
 
-                    <!-- DROPDOWN MENU (Expanded for display) -->
-                    <div class="absolute right-0 top-full mt-3 w-60 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50">
+                    <!-- DROPDOWN MENU -->
+                    <div id="adminDropdown" class="hidden absolute right-0 top-full mt-3 w-60 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50">
                         <!-- Item 1: Active -->
                         <a href="./admin-dashboard.html" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-primary bg-primary/5 border-l-2 border-primary">
                             <iconify-icon icon="lucide:layout-dashboard" width="18" stroke-width="1.5"></iconify-icon>
@@ -295,4 +295,30 @@ sans: ['Inter', 'sans-serif'],
     </main>
 
 
+<script>
+(function() {
+    const adminMenuBtn = document.getElementById('adminMenuBtn');
+    const adminDropdown = document.getElementById('adminDropdown');
+
+    // Toggle dropdown on button click
+    adminMenuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        adminDropdown.classList.toggle('hidden');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!adminDropdown.contains(e.target) && !adminMenuBtn.contains(e.target)) {
+            adminDropdown.classList.add('hidden');
+        }
+    });
+
+    // Close dropdown on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            adminDropdown.classList.add('hidden');
+        }
+    });
+})();
+</script>
 </body></html>

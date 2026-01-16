@@ -64,15 +64,15 @@ error: '#EF4444'
                 </button>
 
                 <!-- Profile & Dropdown -->
-                <div class="relative group">
-                    <button class="flex items-center gap-2 focus:outline-none">
+                <div class="relative">
+                    <button id="profileBtn" class="flex items-center gap-2 focus:outline-none">
                         <div class="w-9 h-9 bg-indigo-100 text-primary border border-indigo-200 rounded-full flex items-center justify-center font-bold text-sm">
                             JL
                         </div>
                     </button>
 
-                    <!-- Dropdown Menu (Displayed as requested) -->
-                    <div class="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden py-1 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <!-- Dropdown Menu -->
+                    <div id="profileDropdown" class="hidden absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden py-1 z-50">
                         <div class="px-4 py-3 border-b border-slate-100">
                             <p class="text-sm font-semibold text-slate-900">Jessica Lee</p>
                             <p class="text-xs text-slate-500 truncate">jessica@example.com</p>
@@ -261,4 +261,30 @@ error: '#EF4444'
     </main>
 
 
+<script>
+(function() {
+    const profileBtn = document.getElementById('profileBtn');
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    // Toggle dropdown on button click
+    profileBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        profileDropdown.classList.toggle('hidden');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!profileDropdown.contains(e.target) && !profileBtn.contains(e.target)) {
+            profileDropdown.classList.add('hidden');
+        }
+    });
+
+    // Close dropdown on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            profileDropdown.classList.add('hidden');
+        }
+    });
+})();
+</script>
 </body></html>

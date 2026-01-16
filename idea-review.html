@@ -75,12 +75,52 @@ sans: ['Inter', 'sans-serif'],
 
             <!-- Right: Actions -->
             <div class="flex items-center justify-end gap-6 w-48 relative">
-                <!-- Admin Menu -->
-                <div class="relative group cursor-pointer">
-                    <button class="flex items-center gap-2 text-sm font-medium text-primary hover:text-primaryHover focus:outline-none transition-colors">
+                <!-- Admin Menu Button & Dropdown Container -->
+                <div class="relative">
+                    <button id="adminMenuBtn" class="flex items-center gap-2 text-sm font-medium text-primary hover:text-primaryHover focus:outline-none transition-colors">
                         Admin
                         <iconify-icon icon="lucide:chevron-down" width="16" stroke-width="1.5"></iconify-icon>
                     </button>
+
+                    <!-- DROPDOWN MENU -->
+                    <div id="adminDropdown" class="hidden absolute right-0 top-full mt-3 w-60 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50">
+                        <a href="./admin-dashboard.html" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:layout-dashboard" width="18" stroke-width="1.5"></iconify-icon>
+                            Overview Dashboard
+                        </a>
+                        <a href="./pending-ideas.html" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:lightbulb" width="18" stroke-width="1.5"></iconify-icon>
+                            Pending Ideas
+                        </a>
+                        <a href="./pending-ideas.html" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:check-circle" width="18" stroke-width="1.5"></iconify-icon>
+                            Edit Approvals
+                        </a>
+                        <a href="./index.html" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:star" width="18" stroke-width="1.5"></iconify-icon>
+                            Featured Ideas
+                        </a>
+                        <a href="./admin-dashboard.html" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:file-text" width="18" stroke-width="1.5"></iconify-icon>
+                            Document Management
+                        </a>
+                        <a href="./admin-dashboard.html" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:bar-chart-2" width="18" stroke-width="1.5"></iconify-icon>
+                            Reports Center
+                        </a>
+                        <a href="./user-management.html" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:users" width="18" stroke-width="1.5"></iconify-icon>
+                            User Management
+                        </a>
+                        <a href="./user-management.html" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:shield" width="18" stroke-width="1.5"></iconify-icon>
+                            Admin Management
+                        </a>
+                        <a href="./admin-dashboard.html" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors border-l-2 border-transparent">
+                            <iconify-icon icon="lucide:layout" width="18" stroke-width="1.5"></iconify-icon>
+                            CMS
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Notification -->
@@ -295,4 +335,30 @@ sans: ['Inter', 'sans-serif'],
     </div>
 
 
+<script>
+(function() {
+    const adminMenuBtn = document.getElementById('adminMenuBtn');
+    const adminDropdown = document.getElementById('adminDropdown');
+
+    // Toggle dropdown on button click
+    adminMenuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        adminDropdown.classList.toggle('hidden');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!adminDropdown.contains(e.target) && !adminMenuBtn.contains(e.target)) {
+            adminDropdown.classList.add('hidden');
+        }
+    });
+
+    // Close dropdown on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            adminDropdown.classList.add('hidden');
+        }
+    });
+})();
+</script>
 </body></html>
