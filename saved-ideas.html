@@ -73,23 +73,63 @@ boxShadow: {
             </div>
 
             <!-- Right: Actions -->
-            <div class="flex items-center gap-3 sm:gap-4">
-                <button class="hidden sm:flex items-center justify-center h-9 px-4 rounded-lg bg-primary hover:bg-primary-hover text-white text-xs font-medium transition-colors shadow-sm">
+            <div class="flex items-center gap-3 sm:gap-4 relative">
+                <a href="./submit-idea.html" class="hidden sm:flex items-center justify-center h-9 px-4 rounded-lg bg-primary hover:bg-primary-hover text-white text-xs font-medium transition-colors shadow-sm">
                     <iconify-icon icon="lucide:plus" width="14" class="mr-1.5"></iconify-icon>
                     Submit Idea
-                </button>
-                
-                <button class="relative p-2 text-slate-400 hover:text-slate-600 transition-colors rounded-full hover:bg-slate-100">
+                </a>
+
+                <div class="h-6 w-px bg-slate-200 hidden sm:block"></div>
+
+                <a href="./notifications.html" class="relative p-2 text-slate-400 hover:text-slate-600 transition-colors rounded-full hover:bg-slate-100">
                     <iconify-icon icon="lucide:bell" width="20"></iconify-icon>
-                    <span class="absolute top-2 right-2.5 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
-                </button>
+                    <span class="absolute top-1.5 right-1.5 w-4 h-4 bg-red-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">3</span>
+                </a>
 
-                <div class="h-8 w-1px bg-slate-200 mx-1 hidden sm:block"></div>
+                <!-- Profile & Dropdown -->
+                <div class="relative">
+                    <button id="profileBtn" class="flex items-center gap-2 focus:outline-none">
+                        <div class="w-9 h-9 bg-indigo-100 text-primary border border-indigo-200 rounded-full flex items-center justify-center font-bold text-sm">
+                            JL
+                        </div>
+                    </button>
 
-                <button class="flex items-center gap-2 focus:outline-none group">
-                    <img class="h-8 w-8 rounded-full ring-2 ring-white object-cover shadow-sm group-hover:ring-primary/20 transition-all" src="https://i.pravatar.cc/150?u=user_88" alt="Profile">
-                    <iconify-icon icon="lucide:chevron-down" class="text-slate-400 hidden sm:block group-hover:text-slate-600" width="16"></iconify-icon>
-                </button>
+                    <!-- Dropdown Menu -->
+                    <div id="profileDropdown" class="hidden absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden py-1 z-50">
+                        <div class="px-4 py-3 border-b border-slate-100">
+                            <p class="text-sm font-semibold text-slate-900">Jessica Lee</p>
+                            <p class="text-xs text-slate-500 truncate">jessica@example.com</p>
+                        </div>
+                        <div class="py-1">
+                            <a href="./user-dashboard.html" class="flex items-center gap-3 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900">
+                                <iconify-icon icon="lucide:layout-dashboard" width="16"></iconify-icon>
+                                My Dashboard
+                            </a>
+                            <a href="./my-ideas.html" class="flex items-center gap-3 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900">
+                                <iconify-icon icon="lucide:lightbulb" width="16"></iconify-icon>
+                                My Ideas
+                            </a>
+                            <a href="./saved-ideas.html" class="flex items-center gap-3 px-4 py-2 text-sm text-primary bg-indigo-50 font-medium border-l-2 border-primary">
+                                <iconify-icon icon="lucide:bookmark" width="16"></iconify-icon>
+                                Saved Ideas
+                            </a>
+                            <a href="./my-documents.html" class="flex items-center gap-3 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900">
+                                <iconify-icon icon="lucide:file-text" width="16"></iconify-icon>
+                                My Documents
+                            </a>
+                        </div>
+                        <div class="border-t border-slate-100 py-1">
+                            <a href="./profile-settings.html" class="flex items-center gap-3 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900">
+                                <iconify-icon icon="lucide:settings" width="16"></iconify-icon>
+                                Settings
+                            </a>
+                            <a href="./login.html" class="flex items-center gap-3 px-4 py-2 text-sm text-red-500 hover:bg-red-50">
+                                <iconify-icon icon="lucide:log-out" width="16"></iconify-icon>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -361,5 +401,27 @@ boxShadow: {
 
     </main>
 
+<script>
+(function() {
+    const profileBtn = document.getElementById('profileBtn');
+    const profileDropdown = document.getElementById('profileDropdown');
 
+    profileBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        profileDropdown.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!profileDropdown.contains(e.target) && !profileBtn.contains(e.target)) {
+            profileDropdown.classList.add('hidden');
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            profileDropdown.classList.add('hidden');
+        }
+    });
+})();
+</script>
 </body></html>
