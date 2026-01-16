@@ -121,7 +121,7 @@ sans: ['Inter', 'sans-serif'],
                 </div>
 
                 <!-- Sign In Button -->
-                <button type="button" class="w-full h-12 bg-primary text-white rounded-lg font-medium text-sm hover:bg-primaryHover focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-1 transition-all shadow-sm flex items-center justify-center gap-2">
+                <button type="button" id="signInBtn" class="w-full h-12 bg-primary text-white rounded-lg font-medium text-sm hover:bg-primaryHover focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-1 transition-all shadow-sm flex items-center justify-center gap-2">
                     Sign In
                 </button>
 
@@ -153,11 +153,30 @@ sans: ['Inter', 'sans-serif'],
             <!-- Footer -->
             <p class="mt-8 text-center text-sm text-slate-500">
                 Don't have an account? 
-                <a href="#" class="font-medium text-primary hover:text-primaryHover transition-colors">Sign up</a>
+                <a href="./signup.html" class="font-medium text-primary hover:text-primaryHover transition-colors">Sign up</a>
             </p>
 
         </div>
     </div>
 
 
+<script>
+(function() {
+  const signInBtn = document.getElementById('signInBtn');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+
+  signInBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    const email = emailInput.value;
+    const password = passwordInput.value;
+
+    if (email === 'demo@demo.com' && password === '1234') {
+      window.location.href = './user-dashboard.html';
+    } else {
+      alert('Demo account: demo@demo.com / 1234');
+    }
+  });
+})();
+</script>
 </body></html>
